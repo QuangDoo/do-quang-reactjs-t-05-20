@@ -3,10 +3,8 @@
   width: 257px;
   border: 1px solid rgba(0, 0, 0, 0.500) !important;
 }
-
+  
 .card__product-img {
-  width: 150px !important;
-  height: 400px;
   margin: auto;
   padding: 10px;
 }
@@ -14,7 +12,6 @@
 .sale {
   position: absolute;
   letter-spacing: 2px;
-  padding: 11px 30px;
   font-weight: bold;
   background-color: orangered;
   color: white;
