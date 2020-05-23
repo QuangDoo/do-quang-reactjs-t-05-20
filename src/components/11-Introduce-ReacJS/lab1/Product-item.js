@@ -5,6 +5,7 @@ class ProductItem extends Component {
     return (
       <div>
         <div className="container">
+          <div className="col-4">
           <div className="card product">
             <p className="sale">SALE</p>
             <img
@@ -27,6 +28,8 @@ class ProductItem extends Component {
               </div>
             </div>
           </div>
+          </div>
+          
         </div>
       </div>
     );

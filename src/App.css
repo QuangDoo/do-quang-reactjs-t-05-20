@@ -3,7 +3,12 @@
   width: 257px;
   border: 1px solid rgba(0, 0, 0, 0.500) !important;
 }
-  
+.products{
+  margin-top: 106px;
+}
+.sidebar{
+  margin-top: 106px;
+}
 .card__product-img {
   margin: auto;
   padding: 10px;
