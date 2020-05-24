@@ -11,7 +11,7 @@ import ProductItem from "./components/ProductItem";
 const products = [
   {
     imgURL:
-      "https://media3.scdn.vn/img4/2020/05_10/Yn4NdkX9RnEAew9JPipk_simg_b5529c_250x250_maxb.jpg",
+      "./img/sp_blackberry.png",
     type: "Furniture",
     name: "Minimal Decor Furniture",
     price: "$199.00",
@@ -19,7 +19,7 @@ const products = [
   },
   {
     imgURL:
-      "https://media3.scdn.vn/img4/2020/02_27/1CyQhihZtTbxzEoR6Gkx_simg_b5529c_250x250_maxb.jpg",
+      "./img/sp_iphoneX.png",
     type: "Furniture",
     name: "Minimal Decor Furniture",
     price: "$399.00",
@@ -27,7 +27,7 @@ const products = [
   },
   {
     imgURL:
-      "https://media3.scdn.vn/img3/2019/10_21/NZBvuS_simg_b5529c_250x250_maxb.jpg",
+      "./img/vsphone.jpg",
     type: "Furniture",
     name: "Minimal Decor Furniture",
     price: "$999.00",
@@ -50,37 +50,37 @@ function SaleOff(props) {
   return <span>{props.priceSaleOff}</span>;
 }
 
-function Product(props) {
-  return (
-    <>
-      <div className="col-4">
-        <div className="card product">
-          <Sale sale={props.data.sale} className="sale" />
-          <Img imgURL={props.data.imgURL} />
-          <div className="card-body card__product-content">
-            <h4 className="card-title card__product-type">Furniture</h4>
-            <Name
-              className="card-text card__product-name"
-              name={props.data.name}
-            />
-            <div className="card__product-price">
-              <p>
-                <span className="price-saleoff">
-                  <Price price={props.data.price} />
-                </span>
-                <span className="price">
-                  <strike>
-                    <SaleOff priceSaleOff={props.data.priceSaleOff} />
-                  </strike>
-                </span>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
+// function Product(props) {
+//   return (
+//     <>
+//       <div className="col-4">
+//         <div className="card product">
+//           <Sale sale={props.data.sale} className="sale" />
+//           <Img imgURL={props.data.imgURL} />
+//           <div className="card-body card__product-content">
+//             <h4 className="card-title card__product-type">Furniture</h4>
+//             <Name
+//               className="card-text card__product-name"
+//               name={props.data.name}
+//             />
+//             <div className="card__product-price">
+//               <p>
+//                 <span className="price-saleoff">
+//                   <Price price={props.data.price} />
+//                 </span>
+//                 <span className="price">
+//                   <strike>
+//                     <SaleOff priceSaleOff={props.data.priceSaleOff} />
+//                   </strike>
+//                 </span>
+//               </p>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
 
 //   return (
 //     <div className="App">
@@ -97,6 +97,7 @@ function Product(props) {
 //     </div>
 //   );
 // }
+
 function App() {
   return (
     <Layout>
