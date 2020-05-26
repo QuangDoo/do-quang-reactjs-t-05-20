@@ -4,7 +4,7 @@ export default function Cart(props) {
   return (
     <li className="d-shop-cart">
       <a href="#">
-        <i className="fas fa-shopping-cart" />{" "}
+        <i className="fas fa-shopping-cart" />
         <span className="cart-count">{props.data.length}</span>
       </a>
       <ul className="minicart">
@@ -37,7 +37,13 @@ export default function Cart(props) {
         <li>
           <div className="total-price">
             <span className="f-left">Total:</span>
-            <span className="f-right">$300.0</span>
+            <span className="f-right">
+              {
+                props.data.reduce((totalPrice, product) => {
+                  return totalPrice+= product.price
+                },0)
+              }
+            </span>
           </div>
         </li>
         <li>
