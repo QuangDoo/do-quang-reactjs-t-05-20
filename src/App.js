@@ -11,7 +11,7 @@ import ProductItem from "./components/ProductItem";
 const products = [
   {
     imgURL:
-      "./img/sp_blackberry.png",
+      "./assets/pro1.jpg",
     type: "Furniture",
     name: "Minimal Decor Furniture",
     price: "$199.00",
@@ -19,7 +19,7 @@ const products = [
   },
   {
     imgURL:
-      "./img/sp_iphoneX.png",
+      "./assets/pro2.jpg",
     type: "Furniture",
     name: "Minimal Decor Furniture",
     price: "$399.00",
@@ -27,28 +27,52 @@ const products = [
   },
   {
     imgURL:
-      "./img/vsphone.jpg",
+      "./assets/pro3.jpg",
+    type: "Furniture",
+    name: "Minimal Decor Furniture",
+    price: "$999.00",
+    disCountPrice: "$1099.00",
+  },
+  {
+    imgURL:
+      "./assets/pro4.jpg",
+    type: "Furniture",
+    name: "Minimal Decor Furniture",
+    price: "$999.00",
+    disCountPrice: "$1099.00",
+  },
+  {
+    imgURL:
+      "./assets/pro5.jpg",
+    type: "Furniture",
+    name: "Minimal Decor Furniture",
+    price: "$999.00",
+    disCountPrice: "$1099.00",
+  },
+  {
+    imgURL:
+      "./assets/pro6.jpg",
     type: "Furniture",
     name: "Minimal Decor Furniture",
     price: "$999.00",
     disCountPrice: "$1099.00",
   },
 ];
-function Img(props) {
-  return <img src={props.imgURL} />;
-}
-function Name(props) {
-  return <p>{props.name}</p>;
-}
-function Price(props) {
-  return <p>{props.price}</p>;
-}
-function Sale(props) {
-  return <p>{props.sale}</p>;
-}
-function SaleOff(props) {
-  return <span>{props.priceSaleOff}</span>;
-}
+// function Img(props) {
+//   return <img src={props.imgURL} />;
+// }
+// function Name(props) {
+//   return <p>{props.name}</p>;
+// }
+// function Price(props) {
+//   return <p>{props.price}</p>;
+// }
+// function Sale(props) {
+//   return <p>{props.sale}</p>;
+// }
+// function SaleOff(props) {
+//   return <span>{props.priceSaleOff}</span>;
+// }
 
 // function Product(props) {
 //   return (

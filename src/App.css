@@ -54,3 +54,6 @@
   opacity: 0.5;
   margin-left: 20px;
 }
+.shop-search input:focus{
+  border: 1px solid #FE4536;
+}
