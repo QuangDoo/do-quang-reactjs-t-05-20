@@ -1,17 +1,18 @@
 import React from "react";
 
 function ProductItem(props) {
+  const onAddToCart = () => props.onSelectProduct(props);
   return (
     <>
       <div className="col-xl-4 col-lg-6 col-md-6">
         <div className="product-wrapper mb-50">
           <div className="product-img mb-25">
             <a href="#">
-              <img src={props.imgURL} alt />
+              <img src={props.image} alt />
             </a>
             <div className="product-action text-center">
-              <a href="#" title="Shoppingb Cart">
-                <i className="fas fa-shopping-cart" />
+              <a title="Shoppingb Cart">
+                <i className="fas fa-shopping-cart" onClick={onAddToCart} />
               </a>
               <a href="#" title="Quick View">
                 <i className="fas fa-search" />
