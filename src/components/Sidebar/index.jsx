@@ -1,6 +1,18 @@
 import React, { Component } from "react";
 
-function SideBar() {
+function SideBar(props) {
+  const sortHighLow = () => {
+    return props.onSort(props);
+  };
+  const sortLowHigh = () => {
+    return props.onSortLow(props);
+  };
+  const SortAZ = () => {
+    return props.onSortAZ(props);
+  };
+  const sortZA = () => {
+    return props.onSortZa(props);
+  };
   return (
     <>
       {/*SideBar */}
@@ -27,16 +39,16 @@ function SideBar() {
             <h3 className="shop-title">SHOP BY</h3>
             <ul className="shop-link">
               <li>
-                <a href="#">Name: A-Z</a>
+                <a onClick={SortAZ}>Name: A-Z</a>
               </li>
               <li>
-                <a href="#">Name: Z-A</a>
+                <a onClick={sortZA}>Name: Z-A</a>
               </li>
               <li>
-                <a href="#">Price: High to Low</a>
+                <a onClick={sortHighLow}>Price: High to Low</a>
               </li>
               <li>
-                <a href="#">Price: Low to High</a>
+                <a onClick={sortLowHigh}>Price: Low to High</a>
               </li>
               <li>
                 <a href="#">Product: Top Sales</a>

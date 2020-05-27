@@ -1,7 +1,7 @@
 import React from "react";
 
 function ProductItem(props) {
-  const onAddToCart = () => props.onSelectProduct(props);
+  const onAddToCart = () => props.onAddProduct(props);
   return (
     <>
       <div className="col-xl-4 col-lg-6 col-md-6">
