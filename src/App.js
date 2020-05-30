@@ -77,7 +77,10 @@ function App() {
     setProductsList(newProducts);
   };
   const onDelete = (productId) => {
-    
+    const deleteProduct = [...productsInCart].filter(
+      (product) => product.id !== productId
+    );
+    setProductsInCart(deleteProduct);
   };
   return (
     <Layout productsInCart={productsInCart} onDelete={onDelete}>
