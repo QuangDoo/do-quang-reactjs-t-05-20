@@ -8,16 +8,18 @@ import ProductItem from "./components/ProductItem";
 import data from "./product.json";
 
 function App() {
+  // state products
+  const [productList, setProductsList] = useState(data.data);
   //add cart
   const [productsInCart, setProductsInCart] = useState([]);
   //sort price high to low
-  const [productsSort, setProductsSort] = useState(data.data);
-  //sort price low to high
-  const [productsLow, setproductsLow] = useState(data.data);
-  // sort A-Z
-  const [productAZ, setProductAZ] = useState(data.data);
+  // const [productsSort, setProductsSort] = useState(data.data);
+  // //sort price low to high
+  // const [productsLow, setproductsLow] = useState(data.data);
+  // // sort A-Z
+  // const [productAZ, setProductAZ] = useState(data.data);
   // delete
-  const [productDelete, setProductDelete] = useState(productsInCart);
+  // const [productDelete, setProductDelete] = useState(productsInCart);
   const AddProductToCart = (newProduct) => {
     let productCart = {
       id: newProduct.id,
@@ -37,23 +39,23 @@ function App() {
     setProductsInCart(productUpdate);
   };
   const onHightToLow = () => {
-    let newProducts = [...productsSort];
+    let newProducts = [...productList];
     newProducts.sort((product1, product2) => product2.price - product1.price);
     console.log(newProducts);
 
-    setProductsSort(newProducts);
+    setProductsList(newProducts);
   };
   const onLowToHigh = () => {
-    let newProducts = [...productsLow];
+    let newProducts = [...productList];
     newProducts.sort((product1, product2) => {
       return product1.price - product2.price;
     });
     console.log(newProducts);
 
-    setproductsLow(newProducts);
+    setProductsList(newProducts);
   };
   const onSortAZ = () => {
-    let newProducts = [...productAZ];
+    let newProducts = [...productList];
     newProducts.sort((product1, product2) => {
       return product1.name
         .toLowerCase()
@@ -61,10 +63,10 @@ function App() {
     });
     console.log(newProducts);
 
-    setProductAZ(newProducts);
+    setProductsList([...newProducts]);
   };
   const onSortZA = () => {
-    let newProducts = [...productAZ];
+    let newProducts = [...productList];
     newProducts.sort((product1, product2) => {
       return product2.name
         .toLowerCase()
@@ -72,21 +74,15 @@ function App() {
     });
     console.log(newProducts);
 
-    setProductAZ(newProducts);
+    setProductsList(newProducts);
   };
   const onDelete = (productId) => {
-    console.log(productId);
-    const newProducts = [...productDelete];
-    const index = newProducts.findIndex((product) => product.id === productId);
-    if (index !== -1) {
-      newProducts.splice(index, 1);
-    }
-    setProductDelete(newProducts);
+    
   };
   return (
     <Layout productsInCart={productsInCart} onDelete={onDelete}>
-      <Content count={data.data.length}>
-        {data.data.map((elm) => {
+      <Content count={productList.length}>
+        {productList.map((elm) => {
           return (
             <ProductItem
               {...elm}
