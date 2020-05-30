@@ -16,19 +16,21 @@ function App() {
   const [productsLow, setproductsLow] = useState(data.data);
   // sort A-Z
   const [productAZ, setProductAZ] = useState(data.data);
-
+  // delete
+  const [productDelete, setProductDelete] = useState(productsInCart);
   const AddProductToCart = (newProduct) => {
     let productCart = {
       id: newProduct.id,
       name: newProduct.name,
+      type: newProduct.type,
       price: newProduct.price,
-      imgURL: newProduct.imgURL,
+      imageURL: newProduct.imageURL,
       quantity: 1,
     };
     let productUpdate = [...productsInCart];
     let index = productUpdate.findIndex((pd) => pd.id === productCart.id);
     if (index !== -1) {
-      productUpdate[index].soLuong += 1;
+      productUpdate[index].quantity += 1;
     } else {
       productUpdate.push(productCart);
     }
@@ -58,7 +60,7 @@ function App() {
         .localeCompare(product2.name.toLowerCase());
     });
     console.log(newProducts);
-    
+
     setProductAZ(newProducts);
   };
   const onSortZA = () => {
@@ -69,12 +71,21 @@ function App() {
         .localeCompare(product1.name.toLowerCase());
     });
     console.log(newProducts);
-    
+
     setProductAZ(newProducts);
   };
+  const onDelete = (productId) => {
+    console.log(productId);
+    const newProducts = [...productDelete];
+    const index = newProducts.findIndex((product) => product.id === productId);
+    if (index !== -1) {
+      newProducts.splice(index, 1);
+    }
+    setProductDelete(newProducts);
+  };
   return (
-    <Layout productsInCart={productsInCart}>
-      <Content sortHighLow={productsSort} count={data.data.length}>
+    <Layout productsInCart={productsInCart} onDelete={onDelete}>
+      <Content count={data.data.length}>
         {data.data.map((elm) => {
           return (
             <ProductItem

@@ -1,15 +1,16 @@
 import React from "react";
 
 export default function Cart(props) {
+  
   return (
-    <li className="d-shop-cart">
+    <li className="d-shop-cart" >
       <a href="#">
         <i className="fas fa-shopping-cart" />
         <span className="cart-count">{props.data.length}</span>
       </a>
       <ul className="minicart">
         {props.data.map((element) => (
-          <li>
+          <li key={element.id}>
             <div className="cart-img">
               <a href="#">
                 <img src={element.imageURL} alt="" />
@@ -27,8 +28,8 @@ export default function Cart(props) {
               </div>
             </div>
             <div className="del-icon">
-              <a href="#">
-                <i className="far fa-trash-alt" />
+              <a>
+                <i className="far fa-trash-alt" onClick={()=>{props.onDelete(element.id)}} />
               </a>
             </div>
           </li>
@@ -38,11 +39,9 @@ export default function Cart(props) {
           <div className="total-price">
             <span className="f-left">Total:</span>
             <span className="f-right">
-              {
-                props.data.reduce((totalPrice, product) => {
-                  return totalPrice+= product.price
-                },0)
-              }
+              {props.data.reduce((totalPrice, product) => {
+                return (totalPrice += product.price*product.quantity);
+              }, 0)}
             </span>
           </div>
         </li>

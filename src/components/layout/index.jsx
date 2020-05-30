@@ -99,7 +99,7 @@ function Layout(props) {
                         <i className="far fa-user" />
                       </a>
                     </li>
-                    <Cart data={props.productsInCart}/>
+                    <Cart data={props.productsInCart} onDelete={props.onDelete}/>
                   </ul>
                 </div>
               </div>
