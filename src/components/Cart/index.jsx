@@ -1,9 +1,8 @@
 import React from "react";
 
 export default function Cart(props) {
-  
   return (
-    <li className="d-shop-cart" >
+    <li className="d-shop-cart">
       <a href="#">
         <i className="fas fa-shopping-cart" />
         <span className="cart-count">{props.data.length}</span>
@@ -29,7 +28,12 @@ export default function Cart(props) {
             </div>
             <div className="del-icon">
               <a>
-                <i className="far fa-trash-alt" onClick={()=>{props.onDelete(element.id)}} />
+                <i
+                  className="far fa-trash-alt"
+                  onClick={() => {
+                    props.onDelete(element.id);
+                  }}
+                />
               </a>
             </div>
           </li>
@@ -40,7 +44,7 @@ export default function Cart(props) {
             <span className="f-left">Total:</span>
             <span className="f-right">
               {props.data.reduce((totalPrice, product) => {
-                return (totalPrice += product.price*product.quantity);
+                return (totalPrice += product.price * product.quantity);
               }, 0)}
             </span>
           </div>

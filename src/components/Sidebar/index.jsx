@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 
 function SideBar(props) {
+  const [value, setValue] = useState(" ");
   const sortHighLow = () => {
     return props.onSort(props);
   };
@@ -13,15 +14,27 @@ function SideBar(props) {
   const sortZA = () => {
     return props.onSortZa(props);
   };
+  const onChangeValue = (e) => {
+    setValue(e.target.value);
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(value);
+    return props.onSubmit(value);
+  };
   return (
-    <>
-      {/*SideBar */}
+    
+     
       <div className="col-xl-3 col-lg-4 sidebar">
         <div className="sidebar-shop">
           <div className="shop-widget">
             <h3 className="shop-title">Search by</h3>
-            <form action="#" className="shop-search">
-              <input type="text" placeholder="Your keyword...." />
+            <form action="#" onSubmit={onSubmit} className="shop-search">
+              <input
+                type="text"
+                placeholder="Your keyword...."
+                onChange={onChangeValue}
+              />
               <button>
                 <i className="fa fa-search" />
               </button>
@@ -135,8 +148,8 @@ function SideBar(props) {
           </div>
         </div>
       </div>
-      {/* /SideBar */}
-    </>
+      
+    
   );
 }
 export default SideBar;

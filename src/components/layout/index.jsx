@@ -1,63 +1,33 @@
-import React from "react";
-import Cart from "../Cart";
+import React from 'react'
+import Cart from '../Cart'
 
 function Layout(props) {
   return (
     <>
-      <header>
+    <header>
         <div id="header-sticky" className="header-area box-90 sticky-header">
           <div className="container-fluid">
             <div className="row align-items-center">
               <div className="col-xl-2 col-lg-6 col-md-6 col-7 col-sm-5 d-flex align-items-center pos-relative">
                 <div className="logo">
-                  <a href="#">
-                    <img src="./assets/logo_shop.png" alt="" />
-                  </a>
+                  <a href="#"><img src="./assets/logo_shop.png" alt="" /></a>
                 </div>
                 <div className="category-menu">
                   <h4>Category</h4>
                   <ul>
-                    <li>
-                      <a href="#">
-                        <i className="fas fa-shopping-cart" /> Table lamp
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fas fa-shopping-cart" /> Furniture
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fas fa-shopping-cart" /> Chair
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fas fa-shopping-cart" /> Men
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fas fa-shopping-cart" /> Women
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fas fa-shopping-cart" /> Cloth
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fas fa-shopping-cart" /> Trend
-                      </a>
-                    </li>
+                    <li><a href="#"><i className="fas fa-shopping-cart" /> Table lamp</a></li>
+                    <li><a href="#"><i className="fas fa-shopping-cart" /> Furniture</a></li>
+                    <li><a href="#"><i className="fas fa-shopping-cart" /> Chair</a></li>
+                    <li><a href="#"><i className="fas fa-shopping-cart" /> Men</a></li>
+                    <li><a href="#"><i className="fas fa-shopping-cart" /> Women</a></li>
+                    <li><a href="#"><i className="fas fa-shopping-cart" /> Cloth</a></li>
+                    <li><a href="#"><i className="fas fa-shopping-cart" /> Trend</a></li>
                   </ul>
                 </div>
               </div>
               <div className="col-xl-8 col-lg-6 col-md-8 col-8 d-none d-xl-block">
                 <div className="main-menu text-center">
-                  <nav id="mobile-menu" style={{ display: "block" }}>
+                  <nav id="mobile-menu" style={{display: 'block'}}>
                     <ul>
                       <li>
                         <a href="./index.html">Home</a>
@@ -87,19 +57,10 @@ function Layout(props) {
                 <div className="header-right f-right">
                   <ul>
                     <li className="search-btn">
-                      <a
-                        className="search-btn nav-search search-trigger"
-                        href="#"
-                      >
-                        <i className="fas fa-search" />
-                      </a>
+                      <a className="search-btn nav-search search-trigger" href="#"><i className="fas fa-search" /></a>
                     </li>
-                    <li className="login-btn">
-                      <a href="#">
-                        <i className="far fa-user" />
-                      </a>
-                    </li>
-                    <Cart data={props.productsInCart} onDelete={props.onDelete}/>
+                    <li className="login-btn"><a href="#"><i className="far fa-user" /></a></li>
+                    <Cart data={props.productsInCart} />
                   </ul>
                 </div>
               </div>
@@ -110,34 +71,22 @@ function Layout(props) {
           </div>
         </div>
       </header>
-      {/* Body */}
-      <main>
-        <section className="shop-area pt-150 pb-100">
-          <div className="container">
-            <div className="row">{props.children}</div>
-          </div>
-        </section>
-      </main>
-      <footer className="footer-area pl-100 pr-100">
-        <div
-          className="footer-area box-90 pt-100 pb-60"
-          data-background="img/bg/footer.jpg"
-          style={{ backgroundImage: 'url("img/bg/footer.jpg")' }}
-        >
+    {/* Body */}
+    {props.children}
+    
+    <footer className="footer-area pl-100 pr-100">
+        <div className="footer-area box-90 pt-100 pb-60" data-background="img/bg/footer.jpg" style={{backgroundImage: 'url("img/bg/footer.jpg")'}}>
           <div className="container">
             <div className="row">
               <div className="col-xl-5 col-lg-6 col-md-6 ">
                 <div className="footer-widget mb-40 pr-70">
                   <div className="footer-logo">
-                    <a href="#">
-                      <img src="./assets/logo_shop.png" alt="" />
-                    </a>
+                    <a href="#"><img src="./assets/logo_shop.png" alt="" /></a>
                   </div>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore mag na
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                    ut labore et dolore mag na
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                    ex ea commodo consequat.
                   </p>
                   <div className="footer-time d-flex mt-30">
                     <div className="time-icon">
@@ -154,24 +103,12 @@ function Layout(props) {
                 <div className="footer-widget mb-40">
                   <h3>Social Media</h3>
                   <ul className="footer-link">
-                    <li>
-                      <a href="#">Facebook</a>
-                    </li>
-                    <li>
-                      <a href="#">Twitter</a>
-                    </li>
-                    <li>
-                      <a href="#">Behance</a>
-                    </li>
-                    <li>
-                      <a href="#"> Dribbble</a>
-                    </li>
-                    <li>
-                      <a href="#">Linkedin</a>
-                    </li>
-                    <li>
-                      <a href="#">Youtube</a>
-                    </li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Behance</a></li>
+                    <li><a href="#"> Dribbble</a></li>
+                    <li><a href="#">Linkedin</a></li>
+                    <li><a href="#">Youtube</a></li>
                   </ul>
                 </div>
               </div>
@@ -179,24 +116,12 @@ function Layout(props) {
                 <div className="footer-widget pl-50 mb-40">
                   <h3>Location</h3>
                   <ul className="footer-link">
-                    <li>
-                      <a href="#">New York</a>
-                    </li>
-                    <li>
-                      <a href="#">Tokyo</a>
-                    </li>
-                    <li>
-                      <a href="#">Dhaka</a>
-                    </li>
-                    <li>
-                      <a href="#">Chittagong</a>
-                    </li>
-                    <li>
-                      <a href="#">China</a>
-                    </li>
-                    <li>
-                      <a href="#">Japan</a>
-                    </li>
+                    <li><a href="#">New York</a></li>
+                    <li><a href="#">Tokyo</a></li>
+                    <li><a href="#">Dhaka</a></li>
+                    <li><a href="#">Chittagong</a></li>
+                    <li><a href="#">China</a></li>
+                    <li><a href="#">Japan</a></li>
                   </ul>
                 </div>
               </div>
@@ -204,24 +129,12 @@ function Layout(props) {
                 <div className="footer-widget mb-40">
                   <h3>About</h3>
                   <ul className="footer-link">
-                    <li>
-                      <a href="#">Terms &amp; Conditions</a>
-                    </li>
-                    <li>
-                      <a href="#"> Privacy Policy</a>
-                    </li>
-                    <li>
-                      <a href="#">Contact Us</a>
-                    </li>
-                    <li>
-                      <a href="#">FAQ</a>
-                    </li>
-                    <li>
-                      <a href="#">Wholesale</a>
-                    </li>
-                    <li>
-                      <a href="#">Direction</a>
-                    </li>
+                    <li><a href="#">Terms &amp; Conditions</a></li>
+                    <li><a href="#"> Privacy Policy</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Wholesale</a></li>
+                    <li><a href="#">Direction</a></li>
                   </ul>
                 </div>
               </div>
@@ -230,6 +143,6 @@ function Layout(props) {
         </div>
       </footer>
     </>
-  );
+  )
 }
-export default Layout;
+export default Layout

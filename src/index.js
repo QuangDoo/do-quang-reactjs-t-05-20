@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Main from './Pages/Main';
+import Register from './Pages/Register'
+import Login from './Pages/Login'
 import * as serviceWorker from './serviceWorker';
-import "bootstrap/dist/css/bootstrap.min.css";
-import "jquery/dist/jquery.min.js";
-import "popper.js/dist/umd/popper.min.js";
-import "bootstrap/dist/js/bootstrap.min.js";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Register/>
   </React.StrictMode>,
   document.getElementById('root')
 );
