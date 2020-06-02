@@ -20,10 +20,11 @@ export default function Cart(props) {
                 <a href="#">{element.name}</a>
               </h3>
               <div className="cart-price">
-                <span className="new">{element.price}</span>
-                <span>
+                <span className="new">Price: {element.price}</span>
+                <span className="ml-4" >
                   <del>{element.priceMax}</del>
                 </span>
+                <span className="ml-5">x{element.quantity}</span>
               </div>
             </div>
             <div className="del-icon">

@@ -53,7 +53,7 @@ function Register() {
             <div className="row">
               <div className="col-lg-8 offset-lg-2">
                 <div className="basic-login">
-                  <h3 className="text-center mb-60">Signup From Here</h3>
+                  <h3 className="text-center mb-60">Sign Up Form Here</h3>
                   <form action="#" onSubmit={onSubmitRegister}>
                     <label htmlFor="name">
                       Full Name <span>**</span>

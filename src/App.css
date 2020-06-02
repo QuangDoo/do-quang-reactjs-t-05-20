@@ -3,12 +3,15 @@
   width: 257px;
   border: 1px solid rgba(0, 0, 0, 0.500) !important;
 }
-.products{
+
+.products {
   margin-top: 106px;
 }
-.sidebar{
+
+.sidebar {
   margin-top: 106px;
 }
+
 .card__product-img {
   margin: auto;
   padding: 10px;
@@ -26,9 +29,11 @@
   top: 10%;
   left: 6%;
 }
-.card__product-content{
+
+.card__product-content {
   padding: 0 1.25rem !important;
 }
+
 .card__product-type {
   font-size: 12px;
   color: red;
@@ -40,20 +45,26 @@
   font-size: 17px;
   font-weight: bold;
   margin: 0;
-
 }
-.price-saleoff{
+
+.price-saleoff {
   font-size: 14px;
   font-weight: bold;
-  color : grey;
+  color: grey;
   margin: 0;
 }
-.price{
-  font-size:14px;
+
+.price {
+  font-size: 14px;
   font-weight: bold;
   opacity: 0.5;
   margin-left: 20px;
 }
-.shop-search input:focus{
+
+.shop-search input:focus {
   border: 1px solid #FE4536;
+}
+
+.shopInfor_shopName {
+  color: #FE4536;
 }

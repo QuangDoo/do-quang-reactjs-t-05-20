@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Layout from "../../components/layout";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [valueLogin, setValueLogin] = useState({ email: "", password: "" });
@@ -80,9 +81,10 @@ function Login() {
                     <div className="or-divide">
                       <span>or</span>
                     </div>
-                    <button className="btn theme-btn w-100">
+                    <Link to={`/register`} className="btn theme-btn w-100">
                       Register Now
-                    </button>
+                    </Link>
+                    
                   </form>
                 </div>
               </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Layout from "./components/layout/index";
 
@@ -12,6 +12,10 @@ function App() {
   const [productList, setProductsList] = useState(data.data);
   //add cart
   const [productsInCart, setProductsInCart] = useState([]);
+  // search product
+  const [keywords, setKeyWords] = useState("");
+  // resutl
+  const [resultSearch , setResultSearch] = useState([]);
 
   const AddProductToCart = (newProduct) => {
     let productCart = {
@@ -19,6 +23,7 @@ function App() {
       name: newProduct.name,
       type: newProduct.type,
       price: newProduct.price,
+      priceMax: newProduct.priceMax,
       imageURL: newProduct.imageURL,
       quantity: 1,
     };
@@ -75,13 +80,12 @@ function App() {
     );
     setProductsInCart(deleteProduct);
   };
-  const onSearchProduct = (productName) => {
-    debugger;
-    const newProductsSearch = [...productList];
-
-    newProductsSearch.filter((pd) => pd.name.includes(productName));
-    setProductsList(newProductsSearch);
+  const onSearchProduct = (keywords) => {
+    setKeyWords(keywords);
   };
+  useEffect(()=>{
+    const result = productList.filter(product => product.name.toLowerCase().includes(keywords))
+  })
   return (
     <Layout productsInCart={productsInCart} onDelete={onDelete}>
       <main>

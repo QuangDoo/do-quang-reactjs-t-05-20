@@ -1,5 +1,6 @@
 import React from 'react'
 import Cart from '../Cart'
+import { Link } from 'react-router-dom'
 
 function Layout(props) {
   return (
@@ -10,7 +11,7 @@ function Layout(props) {
             <div className="row align-items-center">
               <div className="col-xl-2 col-lg-6 col-md-6 col-7 col-sm-5 d-flex align-items-center pos-relative">
                 <div className="logo">
-                  <a href="#"><img src="./assets/logo_shop.png" alt="" /></a>
+                  <Link to={`/`}><img src="./assets/logo_shop.png" alt="" /></Link>
                 </div>
                 <div className="category-menu">
                   <h4>Category</h4>
@@ -30,22 +31,22 @@ function Layout(props) {
                   <nav id="mobile-menu" style={{display: 'block'}}>
                     <ul>
                       <li>
-                        <a href="./index.html">Home</a>
+                        <Link to={`/`}>Home</Link>
                       </li>
                       <li>
-                        <a href="#">Pages</a>
+                        <Link to={`/main`}>Pages</Link>
                         <ul className="submenu">
                           <li>
-                            <a href="./detail.html">Product Detail</a>
+                            <Link to={`/product-detail`}>Product Detail</Link>
                           </li>
                           <li>
-                            <a href="./login.html">login</a>
+                            <Link to={`/login`}>login</Link>
                           </li>
                           <li>
-                            <a href="./register.html">Register</a>
+                            <Link to={`/register`}>Register</Link>
                           </li>
                           <li>
-                            <a href="./cart.html">Shoping Cart</a>
+                            <Link to={`/cart`}>Shoping Cart</Link>
                           </li>
                         </ul>
                       </li>
@@ -59,8 +60,8 @@ function Layout(props) {
                     <li className="search-btn">
                       <a className="search-btn nav-search search-trigger" href="#"><i className="fas fa-search" /></a>
                     </li>
-                    <li className="login-btn"><a href="#"><i className="far fa-user" /></a></li>
-                    <Cart data={props.productsInCart} />
+                    <li className="login-btn"><Link to={`/login`}><i className="far fa-user"/></Link></li>
+                    <Cart data={props.productsInCart} onDelete={props.onDelete}/>
                   </ul>
                 </div>
               </div>

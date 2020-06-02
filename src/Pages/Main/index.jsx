@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Main.css";
 import Layout from "../../components/layout";
 
@@ -6,8 +6,11 @@ import SideBar from "../../components/Sidebar";
 import Content from "../../components/content";
 import ProductItem from "../../components/ProductItem";
 import data from "../../product.json";
+import {ThemeContext} from "../../index";
 
 function App() {
+  const value = useContext(ThemeContext)
+  const tempData = data.data;
   // state products
   const [productList, setProductsList] = useState(data.data);
   //add cart
@@ -76,15 +79,16 @@ function App() {
     setProductsInCart(deleteProduct);
   };
   const onSearchProduct = (productName) => {
-    debugger;
-    const newProductsSearch = [...productList];
+    const newProductsSearch = [...tempData];
 
-    newProductsSearch.filter((pd) => pd.name.includes(productName));
+    newProductsSearch.filter((product) =>{
+      return product.name.includes(productName);
+    })
     setProductsList(newProductsSearch);
   };
   return (
     <Layout productsInCart={productsInCart} onDelete={onDelete}>
-      <main>
+      <main >
         <section className="shop-area pt-150 pb-100">
           <div className="container">
             <div className="row">
