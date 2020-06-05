@@ -78,14 +78,14 @@ function App() {
     );
     setProductsInCart(deleteProduct);
   };
-  const onSearchProduct = (productName) => {
-    const newProductsSearch = [...tempData];
-
-    newProductsSearch.filter((product) =>{
-      return product.name.includes(productName);
+  const onSearch =(value)=>{
+    console.log(value);
+    
+    const newProducts = [...data.data].filter(product=>{
+      return product.name.includes(value)
     })
-    setProductsList(newProductsSearch);
-  };
+  setProductsList(newProducts);
+  }
   return (
     <Layout productsInCart={productsInCart} onDelete={onDelete}>
       <main >
@@ -108,7 +108,7 @@ function App() {
                 onSortLow={onLowToHigh}
                 onSortAZ={onSortAZ}
                 onSortZa={onSortZA}
-                onSubmit={onSearchProduct}
+                onSearch={onSearch}
               />
             </div>
           </div>

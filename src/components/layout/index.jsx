@@ -34,7 +34,7 @@ function Layout(props) {
                         <Link to={`/`}>Home</Link>
                       </li>
                       <li>
-                        <Link to={`/main`}>Pages</Link>
+                        <Link to={``}>Pages</Link>
                         <ul className="submenu">
                           <li>
                             <Link to={`/product-detail`}>Product Detail</Link>

@@ -17,16 +17,16 @@ function SideBar(props) {
   const handleOnChangeValueSearch = (e) => {
     setValue(e.target.value);
   };
-  const onSubmitSearch = (e) => {
+  const onSearch = (e) => {
     e.preventDefault();
-    return props.onSubmit(value);
+    return props.onSearch(value);
   };
   return (
       <div className="col-xl-3 col-lg-4 sidebar">
         <div className="sidebar-shop">
           <div className="shop-widget">
             <h3 className="shop-title">Search by</h3>
-            <form action="#" onSubmit={onSubmitSearch} className="shop-search">
+            <form action="#" onSubmit={onSearch} className="shop-search">
               <input
                 type="text"
                 placeholder="Your keyword...."

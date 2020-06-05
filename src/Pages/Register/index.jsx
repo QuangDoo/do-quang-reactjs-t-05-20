@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Layout from "../../components/layout";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [valueRegister, setValueRegister] = useState({
@@ -53,7 +54,7 @@ function Register() {
             <div className="row">
               <div className="col-lg-8 offset-lg-2">
                 <div className="basic-login">
-                  <h3 className="text-center mb-60">Sign Up Form Here</h3>
+                  <h3 className="text-center mb-60">Sign Up From Here</h3>
                   <form action="#" onSubmit={onSubmitRegister}>
                     <label htmlFor="name">
                       Full Name <span>**</span>
@@ -89,7 +90,7 @@ function Register() {
                     <div className="or-divide">
                       <span>or</span>
                     </div>
-                    <button className="btn theme-btn w-100">login Now</button>
+                    <Link to={`/login`} className="btn theme-btn w-100">login Now</Link>
                   </form>
                 </div>
               </div>

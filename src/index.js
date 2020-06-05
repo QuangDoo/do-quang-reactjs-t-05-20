@@ -8,6 +8,7 @@ import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 import ProductDetail from "./Pages/ProductDetail";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import PageNotFound from "./Pages/pageNotFound";
 
 export const ThemeContext = React.createContext("light");
 
@@ -27,6 +28,9 @@ ReactDOM.render(
           </Route>
           <Route exact path="/(product-detail|chi-tiet-san-pham)">
             <ProductDetail />
+          </Route>
+          <Route>
+            <PageNotFound path="*"/>
           </Route>
         </Switch>
       </ThemeContext.Provider>
