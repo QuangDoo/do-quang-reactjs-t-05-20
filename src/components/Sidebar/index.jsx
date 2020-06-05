@@ -49,19 +49,19 @@ function SideBar(props) {
             <h3 className="shop-title">SHOP BY</h3>
             <ul className="shop-link">
               <li>
-                <a onClick={SortAZ}>Name: A-Z</a>
+                <p onClick={SortAZ}>Name: A-Z</p>
               </li>
               <li>
-                <a onClick={sortZA}>Name: Z-A</a>
+                <p  onClick={sortZA}>Name: Z-A</p>
               </li>
               <li>
-                <a onClick={sortHighLow}>Price: High to Low</a>
+                <p href="#" onClick={sortHighLow}>Price: High to Low</p>
               </li>
               <li>
-                <a onClick={sortLowHigh}>Price: Low to High</a>
+                <p href="#" onClick={sortLowHigh}>Price: Low to High</p>
               </li>
               <li>
-                <a href="#">Product: Top Sales</a>
+                <p href="#">Product: Top Sales</p>
               </li>
             </ul>
           </div>
