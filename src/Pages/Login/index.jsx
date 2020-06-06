@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState  } from "react";
 import Layout from "../../components/layout";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
   const [valueLogin, setValueLogin] = useState({ email: "", password: "" });
-
+  const [errMessage, setErrMessage] = useState("");
+  const  history  = useHistory();
   const onChangeValue = (e) => {
     setValueLogin({ ...valueLogin, email: e.target.value });
   };
@@ -13,8 +15,24 @@ function Login() {
   };
   const onSubmitLogin = (e) => {
     e.preventDefault();
-    console.log(valueLogin);
+    login(valueLogin);
   };
+  const login = async (data) => {
+    try {
+      const result = await axios({
+        method: "POST",
+        url: "https://min-shop.herokuapp.com/rest/user/signIn",
+        data,
+      });
+      console.log(result);
+
+      localStorage.setItem("token", result.data.accessToken);
+      history.push("/");
+    } catch (err) {
+      setErrMessage(err.response.data.message);
+    }
+  };
+
   return (
     <Layout productsInCart={[]}>
       <main>
@@ -50,6 +68,7 @@ function Login() {
                 <div className="basic-login">
                   <h3 className="text-center mb-60">Login From Here</h3>
                   <form action="#" onSubmit={onSubmitLogin}>
+                    <span className="text-danger">{errMessage}</span>
                     <label htmlFor="name">
                       Email Address <span>**</span>
                     </label>
@@ -84,7 +103,6 @@ function Login() {
                     <Link to={`/register`} className="btn theme-btn w-100">
                       Register Now
                     </Link>
-                    
                   </form>
                 </div>
               </div>

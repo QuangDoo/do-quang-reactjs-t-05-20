@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../../components/layout";
 import { Link } from "react-router-dom";
+import axios from "axios"
 
 function Register() {
   const [valueRegister, setValueRegister] = useState({
@@ -19,7 +20,20 @@ function Register() {
   };
   const onSubmitRegister = (e) => {
     e.preventDefault();
-    console.log(valueRegister);
+    register(valueRegister);
+  };
+  const register = async (data) => {
+    try {
+      const result = await axios({
+        method: 'POST',
+        url:"https://min-shop.herokuapp.com/rest/user/signUp",
+        data
+      })
+      console.log(result);
+      
+    } catch(err) {
+      console.log(err.message);
+    }
   };
   return (
     <Layout productsInCart={[]}>
@@ -90,7 +104,9 @@ function Register() {
                     <div className="or-divide">
                       <span>or</span>
                     </div>
-                    <Link to={`/login`} className="btn theme-btn w-100">login Now</Link>
+                    <Link to={`/login`} className="btn theme-btn w-100">
+                      login Now
+                    </Link>
                   </form>
                 </div>
               </div>
