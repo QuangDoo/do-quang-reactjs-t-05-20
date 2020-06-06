@@ -1,13 +1,22 @@
 import React from "react";
-import Layout from "../../components/layout";
+import { withRouter, useParams } from "react-router-dom";
 
-export default function ProductDetail() {
+import Layout from "../../components/layout";
+import dataProduct from "../../product.json";
+function ProductDetail(props) {
+  // dung useParams
+  const params = useParams()
+
+  // dung withRouter 
+  const product = dataProduct.data.find(
+    (elm) => elm.id == params.id
+  );
   return (
     <Layout productsInCart={[]}>
       <main>
         <section
           className="breadcrumb-area"
-          style={{ backgroundImage: 'url("./assets/page-title.png")' }}
+          style={{ backgroundImage: 'url("/assets/page-title.png")' }}
         >
           <div className="container">
             <div className="row">
@@ -39,12 +48,12 @@ export default function ProductDetail() {
                       role="tabpanel"
                     >
                       <div className="product-large-img">
-                        <img src="img/product/pro1.jpg" alt />
+                        <img src={product.image} alt />
                       </div>
                     </div>
                     <div className="tab-pane fade" id="profile" role="tabpanel">
                       <div className="product-large-img">
-                        <img src="img/product/pro2.jpg" alt />
+                        <img src={params.img} alt />
                       </div>
                     </div>
                     <div
@@ -53,7 +62,7 @@ export default function ProductDetail() {
                       role="tabpanel"
                     >
                       <div className="product-large-img">
-                        <img src="img/product/pro3.jpg" alt />
+                        <img src={params.img} alt />
                       </div>
                     </div>
                   </div>
@@ -69,7 +78,7 @@ export default function ProductDetail() {
                         role="tab"
                         aria-selected="true"
                       >
-                        <img src="img/product/pro1.jpg" alt />
+                        <img src={product.image} alt />
                       </a>
                     </li>
                     <li className="nav-item">
@@ -81,7 +90,7 @@ export default function ProductDetail() {
                         role="tab"
                         aria-selected="false"
                       >
-                        <img src="img/product/pro2.jpg" alt />
+                        <img src={product.image} alt />
                       </a>
                     </li>
                     <li className="nav-item">
@@ -93,7 +102,7 @@ export default function ProductDetail() {
                         role="tab"
                         aria-selected="false"
                       >
-                        <img src="img/product/pro3.jpg" alt />
+                        <img src={product.image} alt />
                       </a>
                     </li>
                   </ul>
@@ -102,15 +111,13 @@ export default function ProductDetail() {
               <div className="col-xl-6 col-lg-8">
                 <div className="product-details mb-30 pl-30">
                   <div className="details-cat mb-20">
-                    <a href="#">decor,</a>
+                    <a href="#">{props.type}</a>
                     <a href="#">furniture</a>
                   </div>
-                  <h2 className="pro-details-title mb-15">
-                    Limonda Women Winter Cloth
-                  </h2>
+                  <h2 className="pro-details-title mb-15">{product.name}</h2>
                   <div className="details-price mb-20">
-                    <span>$119.00</span>
-                    <span className="old-price">$246.00</span>
+                    <span>{product.price.toLocaleString()}</span>
+                    <span className="old-price">{product.priceMax.toLocaleString()}</span>
                   </div>
                   <div className="product-variant">
                     <div className="product-desc variant-item">
@@ -124,7 +131,7 @@ export default function ProductDetail() {
                     <div className="product-info-list variant-item">
                       <ul>
                         <li>
-                          <span>Brands:</span> Hewlett-Packard
+                          <span>Brands:</span> {props.brand}
                         </li>
                         <li>
                           <span>Product Code:</span> d12
@@ -643,3 +650,4 @@ export default function ProductDetail() {
     </Layout>
   );
 }
+export default withRouter(ProductDetail);

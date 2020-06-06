@@ -17,7 +17,7 @@ function ProductItem(props) {
               <a title="Shoppingb Cart">
                 <i className="fas fa-shopping-cart" onClick={onAddToCart} />
               </a>
-              <Link  to={`/product-detail`} title="Quick View">
+              <Link  to={`/product-detail/${props.id}`} title="Quick View">
                 <i className="fas fa-search" />
               </Link>
             </div>
@@ -34,7 +34,6 @@ function ProductItem(props) {
             <div className="product-meta">
               <div className="pro-price">
                 <span>{props.price}</span>
-
                 <span className="old-price">{props.disCountPrice}</span>
               </div>
             </div>

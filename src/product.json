@@ -28,6 +28,7 @@
         "shop_mall": 0,
         "shop_brand_type": 0
       },
+      "brand":"no brand",
       "options": [],
       "ratingInfo": {
         "total_rated": 1,
