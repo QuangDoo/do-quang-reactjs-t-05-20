@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
 function Register() {
+  const [err, setErr] = useState("");
   const [valueRegister, setValueRegister] = useState({
     fullName: "",
     email: "",
@@ -30,7 +31,8 @@ function Register() {
       console.log(result);
       // history.push('/(login|dang-nhap)')
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.response.data.message);
+      setErr(err.response.data.message);
     }
   };
   return (
@@ -68,6 +70,7 @@ function Register() {
                 <div className="basic-login">
                   <h3 className="text-center mb-60">Sign Up From Here</h3>
                   <form action="#" onSubmit={onSubmitRegister}>
+                    <span className="text-danger">{err}</span>
                     <label htmlFor="name">
                       Full Name <span>**</span>
                     </label>

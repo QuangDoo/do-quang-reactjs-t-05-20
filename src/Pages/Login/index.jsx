@@ -26,6 +26,7 @@ function Login(props) {
       });
       localStorage.setItem("token", result.data.accessToken);
       history.push("/");
+      window.location.reload();
     } catch (err) {
       setErrMessage(err.response.data.message);
     }

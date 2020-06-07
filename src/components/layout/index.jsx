@@ -1,10 +1,10 @@
 import React from "react";
 import Cart from "../Cart";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 // const history = useHistory();
 const logOut = () => {
   localStorage.removeItem("token");
-
+  window.location.reload();
   // history.push('/')
 };
 
