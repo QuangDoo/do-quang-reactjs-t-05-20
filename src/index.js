@@ -7,32 +7,41 @@ import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 // import ProductDetail from "./Pages/ProductDetail";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  Redirect,
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 import PageNotFound from "./Pages/pageNotFound";
 import dataProduct from "./product.json";
 import Loading from "./components/Loading";
 const Main = React.lazy(() => import("./Pages/Main"));
-const Login = React.lazy(()=> import("./Pages/Login"))
-const Register = React.lazy(()=> import("./Pages/Register"))
-const ProductDetail = React.lazy(()=> import("./Pages/ProductDetail"))
+const Login = React.lazy(() => import("./Pages/Login"));
+const Register = React.lazy(() => import("./Pages/Register"));
+const ProductDetail = React.lazy(() => import("./Pages/ProductDetail"));
 export const ThemeContext = React.createContext("light");
-
+const token = localStorage.getItem("token");
 ReactDOM.render(
-    <Router>
-      <React.Suspense fallback={<Loading/>}>
+  <Router>
+    <React.Suspense fallback={<Loading />}>
       <ThemeContext.Provider value="black">
         <Switch>
           <Route exact path="/" component={Main} />
 
-          <Route exact path="/(login|dang-nhap)" component={Login}/>
-           
+          <Route exact path="/(login|dang-nhap)" component={Login} />
+
           {/* <Route exact path="/(register|dang-ky)">
             <Register />
           </Route> */}
           <Route exact path="/(register|dang-ky)" component={Register} />
 
-          <Route exact path="/(product-detail|chi-tiet-san-pham)/:id" component={ProductDetail}/>
-            
+          <Route
+            exact
+            path="/(product-detail|chi-tiet-san-pham)/:id"
+            component={ProductDetail}
+          />
+          
           {/* props render */}
           {/* <Route
             exact
@@ -64,9 +73,8 @@ ReactDOM.render(
           </Route>
         </Switch>
       </ThemeContext.Provider>
-      </React.Suspense>
-    </Router>
- ,
+    </React.Suspense>
+  </Router>,
   document.getElementById("root")
 );
 

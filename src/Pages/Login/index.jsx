@@ -1,17 +1,17 @@
-import React, { useState  } from "react";
+import React, { useState } from "react";
 import Layout from "../../components/layout";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
-function Login() {
+function Login(props) {
   const [valueLogin, setValueLogin] = useState({ email: "", password: "" });
   const [errMessage, setErrMessage] = useState("");
-  const  history  = useHistory();
+  const history = useHistory();
   const onChangeValue = (e) => {
-    setValueLogin({ ...valueLogin, email: e.target.value });
-  };
-  const onChangeValuePssWd = (e) => {
-    setValueLogin({ ...valueLogin, password: e.target.value });
+    setValueLogin({
+      ...valueLogin,
+      [e.target.name]: e.target.value,
+    });
   };
   const onSubmitLogin = (e) => {
     e.preventDefault();
@@ -24,8 +24,6 @@ function Login() {
         url: "https://min-shop.herokuapp.com/rest/user/signIn",
         data,
       });
-      console.log(result);
-
       localStorage.setItem("token", result.data.accessToken);
       history.push("/");
     } catch (err) {
@@ -73,8 +71,9 @@ function Login() {
                       Email Address <span>**</span>
                     </label>
                     <input
+                      name="email"
                       id="name"
-                      type="text"
+                      type="email"
                       placeholder="Enter Username or Email address..."
                       onChange={onChangeValue}
                     />
@@ -82,10 +81,11 @@ function Login() {
                       Password <span>**</span>
                     </label>
                     <input
+                      name="password"
                       id="pass"
                       type="password"
                       placeholder="Enter password..."
-                      onChange={onChangeValuePssWd}
+                      onChange={onChangeValue}
                     />
                     <div className="login-action mb-20 fix">
                       <span className="log-rem f-left">

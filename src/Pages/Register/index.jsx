@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../../components/layout";
-import { Link } from "react-router-dom";
-import axios from "axios"
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
 
 function Register() {
   const [valueRegister, setValueRegister] = useState({
@@ -9,29 +9,27 @@ function Register() {
     email: "",
     password: "",
   });
-  const onChangeFullName = (e) => {
-    setValueRegister({ ...valueRegister, fullName: e.target.value });
-  };
-  const onChangeEmail = (e) => {
-    setValueRegister({ ...valueRegister, email: e.target.value });
-  };
-  const onChangePassWord = (e) => {
-    setValueRegister({ ...valueRegister, password: e.target.value });
+  const onChange = (e) => {
+    setValueRegister({
+      ...valueRegister,
+      [e.target.name]: e.target.value,
+    });
   };
   const onSubmitRegister = (e) => {
     e.preventDefault();
     register(valueRegister);
   };
+  const history = useHistory();
   const register = async (data) => {
     try {
       const result = await axios({
-        method: 'POST',
-        url:"https://min-shop.herokuapp.com/rest/user/signUp",
-        data
-      })
+        method: "POST",
+        url: "https://min-shop.herokuapp.com/rest/user/signUp",
+        data,
+      });
       console.log(result);
-      
-    } catch(err) {
+      // history.push('/(login|dang-nhap)')
+    } catch (err) {
       console.log(err.message);
     }
   };
@@ -41,7 +39,7 @@ function Register() {
         {/* breadcrumb-area-start */}
         <section
           className="breadcrumb-area"
-          style={{ backgroundImage: 'url("./assets/page-title.png")' }}
+          style={{ backgroundImage: 'url("/assets/page-title.png")' }}
         >
           <div className="container">
             <div className="row">
@@ -74,28 +72,31 @@ function Register() {
                       Full Name <span>**</span>
                     </label>
                     <input
+                      name="username"
                       id="name"
                       type="text"
                       placeholder="Enter Username or Email address..."
-                      onChange={onChangeFullName}
+                      onChange={onChange}
                     />
                     <label htmlFor="email-id">
                       Email Address <span>**</span>
                     </label>
                     <input
+                      name="email"
                       id="email-id"
-                      type="text"
+                      type="email"
                       placeholder="Enter Username or Email address..."
-                      onChange={onChangeEmail}
+                      onChange={onChange}
                     />
                     <label htmlFor="pass">
                       Password <span>**</span>
                     </label>
                     <input
+                      name="password"
                       id="pass"
                       type="password"
                       placeholder="Enter password..."
-                      onChange={onChangePassWord}
+                      onChange={onChange}
                     />
                     <div className="mt-10" />
                     <button className="btn theme-btn-2 w-100">

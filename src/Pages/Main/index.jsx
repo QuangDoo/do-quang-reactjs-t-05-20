@@ -9,6 +9,9 @@ import data from "../../product.json";
 import {ThemeContext} from "../../index";
 
 function App() {
+  const token = localStorage.getItem("token");
+  console.log(token);
+  
   const value = useContext(ThemeContext)
   const tempData = data.data;
   // state products
