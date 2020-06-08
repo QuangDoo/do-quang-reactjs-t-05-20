@@ -38,7 +38,7 @@ function Login(props) {
         {/* breadcrumb-area-start */}
         <section
           className="breadcrumb-area"
-          style={{ backgroundImage: 'url("./assets/page-title.png")' }}
+          style={{ backgroundImage: 'url("/assets/page-title.png")' }}
         >
           <div className="container">
             <div className="row">

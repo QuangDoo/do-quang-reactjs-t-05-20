@@ -29,7 +29,7 @@ function Register() {
         data,
       });
       console.log(result);
-      // history.push('/(login|dang-nhap)')
+      history.push("/login")
     } catch (err) {
       // console.log(err.response.data.message);
       setErr(err.response.data.message);
