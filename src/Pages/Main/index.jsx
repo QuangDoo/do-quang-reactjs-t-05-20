@@ -7,11 +7,15 @@ import Content from "../../components/content";
 import ProductItem from "../../components/ProductItem";
 import data from "../../product.json";
 import { ThemeContext } from "../../index";
-
+import axios from "axios";
 import { getProductList } from "./Main.action";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
+import {
+  productsListRequestAction,
+  productsListSuccessAction,
+  productsListFailAction,
+} from "./Main.action";
 function App(props) {
   const value = useContext(ThemeContext);
 
@@ -141,7 +145,20 @@ const mapStateToProps = (state) => {
 //     getProductList: bindActionCreators(getProductList, dispatch),
 //   };
 // };
-const mapDispatchToProps = {
-  getProductList
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getProductList: async (products) => {
+      dispatch(productsListRequestAction());
+      try {
+        const resutl = await axios({
+          method: "GET",
+          url: "https://min-shop.herokuapp.com/rest/product",
+        });
+        dispatch(productsListSuccessAction(resutl.data.data));
+      } catch (err) {
+        dispatch(productsListFailAction(err));
+      }
+    },
+  };
+};
 export default connect(mapStateToProps, mapDispatchToProps)(App);

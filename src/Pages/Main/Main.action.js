@@ -3,24 +3,24 @@ export const PRODUCTLIST_REQUEST = "PRODUCTLIST_REQUEST";
 export const PRODUCTLIST_SUCCESS = "PRODUCTLIST_SUCCESS";
 export const PRODUCTLIST_FAIL = "PRODUCTLIST_FAIL";
 
-export function loginRequestAction() {
+export function productsListRequestAction() {
   return {
     type: PRODUCTLIST_REQUEST,
   };
 }
-export function loginSuccessAction(data) {
+export function productsListSuccessAction(data) {
   return {
     type: PRODUCTLIST_SUCCESS,
     data,
   };
 }
-export function loginFailAction(err) {
+export function productsListFailAction(err) {
   return {
     type: PRODUCTLIST_FAIL,
     err,
   };
 }
-export async function getProductList() {
+/*export async function getProductList() {
   return async (dispatch) => {
     dispatch(loginRequestAction());
     // try {
@@ -33,4 +33,4 @@ export async function getProductList() {
     //   dispatch(loginFailAction(err));
     // }
   };
-}
+}*/
