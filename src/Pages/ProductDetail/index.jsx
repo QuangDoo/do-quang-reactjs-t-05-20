@@ -6,11 +6,13 @@ import dataProduct from "../../product.json";
 function ProductDetail(props) {
   // dung useParams
   const params = useParams()
-
-  // dung withRouter 
+  console.log(params);
+  
   const product = dataProduct.data.find(
     (elm) => elm.id == params.id
   );
+  console.log(product);
+  
   return (
     <Layout productsInCart={[]}>
       <main>
@@ -47,13 +49,13 @@ function ProductDetail(props) {
                       id="home"
                       role="tabpanel"
                     >
-                      <div className="product-large-img">
+                      <div className="product-large-img img-fluid">
                         <img src={product.image} alt />
                       </div>
                     </div>
                     <div className="tab-pane fade" id="profile" role="tabpanel">
                       <div className="product-large-img">
-                        <img src={params.img} alt />
+                        <img src={product.image} alt />
                       </div>
                     </div>
                     <div
@@ -62,7 +64,7 @@ function ProductDetail(props) {
                       role="tabpanel"
                     >
                       <div className="product-large-img">
-                        <img src={params.img} alt />
+                        <img src={product.image} alt />
                       </div>
                     </div>
                   </div>
@@ -131,7 +133,7 @@ function ProductDetail(props) {
                     <div className="product-info-list variant-item">
                       <ul>
                         <li>
-                          <span>Brands:</span> {props.brand}
+                          <span>Brands:</span>
                         </li>
                         <li>
                           <span>Product Code:</span> d12

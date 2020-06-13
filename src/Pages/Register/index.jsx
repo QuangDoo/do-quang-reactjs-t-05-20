@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Layout from "../../components/layout";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-
+import swal from "sweetalert";
 function Register() {
   const [err, setErr] = useState("");
   const [valueRegister, setValueRegister] = useState({
@@ -10,7 +10,7 @@ function Register() {
     email: "",
     password: "",
   });
-  const onChange = (e) => {
+  const onChange = (e) => {  
     setValueRegister({
       ...valueRegister,
       [e.target.name]: e.target.value,
@@ -29,10 +29,18 @@ function Register() {
         data,
       });
       console.log(result);
-      history.push("/login")
+      history.push("/login");
+      swal({
+        title: "Register successfully",
+        icon: "success",
+        timer: 2000,
+        buttons: false,
+      });
     } catch (err) {
       // console.log(err.response.data.message);
       setErr(err.response.data.message);
+      console.log(err);
+      
     }
   };
   return (

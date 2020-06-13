@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 
-const token = localStorage.getItem("token");
+// const token = localStorage.getItem("token");
 
 function ProductItem(props) {
   const onAddToCart = () => {
@@ -21,14 +21,16 @@ function ProductItem(props) {
               <a title="Shoppingb Cart">
                 <i className="fas fa-shopping-cart" onClick={onAddToCart} />
               </a>
-
-              {token ? (
+              <Link to={`/product-detail/${props.id}`} title="Quick View">
+                  <i className="fas fa-search" />
+                </Link>
+              {/* {token ? (
                 <Link to={`/product-detail/${props.id}`} title="Quick View">
                   <i className="fas fa-search" />
                 </Link>
               ) : (
                 <Link to={`/login`}><i className="fas fa-search" /></Link>
-              )}
+              )} */}
             </div>
           </div>
           <div className="product-content pr-0">

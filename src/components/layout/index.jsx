@@ -1,11 +1,10 @@
 import React from "react";
 import Cart from "../Cart";
-import { Link } from "react-router-dom";
-// const history = useHistory();
+import { Link} from "react-router-dom";
+
 const logOut = () => {
   localStorage.removeItem("token");
   window.location.reload();
-  // history.push('/')
 };
 
 function Layout(props) {
@@ -166,10 +165,10 @@ function Layout(props) {
                   <h3>Social Media</h3>
                   <ul className="footer-link">
                     <li>
-                      <a href="#">Facebook</a>
+                      <a href="https://www.facebook.com/">Facebook</a>
                     </li>
                     <li>
-                      <a href="#">Twitter</a>
+                      <a href="twitter.com">Twitter</a>
                     </li>
                     <li>
                       <a href="#">Behance</a>

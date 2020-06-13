@@ -9,7 +9,7 @@ function Content(props) {
           <div className="col-xl-5 col-lg-6 col-md-6">
             <div className="product-showing mb-40">
               <p>
-                Showing {props.count} of {props.count} results{" "}
+                Showing {props.count} of {props.count} 
               </p>
             </div>
           </div>

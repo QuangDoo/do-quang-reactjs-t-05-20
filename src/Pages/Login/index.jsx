@@ -7,6 +7,8 @@ function Login(props) {
   const [valueLogin, setValueLogin] = useState({ email: "", password: "" });
   const [errMessage, setErrMessage] = useState("");
   const history = useHistory();
+
+  
   const onChangeValue = (e) => {
     setValueLogin({
       ...valueLogin,
@@ -25,7 +27,9 @@ function Login(props) {
         data,
       });
       localStorage.setItem("token", result.data.accessToken);
-      history.push("/");
+      if (history.location.state.from.pathname) {
+        history.push(history.location.state.from.pathname);
+      }
       window.location.reload();
     } catch (err) {
       setErrMessage(err.response.data.message);

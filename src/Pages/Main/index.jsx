@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Main.css";
 import Layout from "../../components/layout";
 
@@ -6,18 +6,29 @@ import SideBar from "../../components/Sidebar";
 import Content from "../../components/content";
 import ProductItem from "../../components/ProductItem";
 import data from "../../product.json";
-import {ThemeContext} from "../../index";
+import { ThemeContext } from "../../index";
 
-function App() {
-  const token = localStorage.getItem("token");
-  console.log(token);
-  
-  const value = useContext(ThemeContext)
-  const tempData = data.data;
+import { getProductList } from "./Main.action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+function App(props) {
+  const value = useContext(ThemeContext);
+
   // state products
-  const [productList, setProductsList] = useState(data.data);
+  const [productList, setProductsList] = useState([]);
   //add cart
   const [productsInCart, setProductsInCart] = useState([]);
+
+  useEffect(() => {
+    if (props.productsList) {
+      setProductsList(props.productsList);
+    }
+  }, [props.productsList]);
+
+  useEffect(() => {
+    props.getProductList();
+  }, []);
 
   const AddProductToCart = (newProduct) => {
     let productCart = {
@@ -81,17 +92,17 @@ function App() {
     );
     setProductsInCart(deleteProduct);
   };
-  const onSearch =(value)=>{
+  const onSearch = (value) => {
     console.log(value);
-    
-    const newProducts = [...data.data].filter(product=>{
-      return product.name.includes(value)
-    })
-  setProductsList(newProducts);
-  }
+
+    const newProducts = [...data.data].filter((product) => {
+      return product.name.includes(value);
+    });
+    setProductsList(newProducts);
+  };
   return (
     <Layout productsInCart={productsInCart} onDelete={onDelete}>
-      <main >
+      <main>
         <section className="shop-area pt-150 pb-100">
           <div className="container">
             <div className="row">
@@ -120,4 +131,17 @@ function App() {
     </Layout>
   );
 }
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    productsList: state.productsReducer.products,
+  };
+};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     getProductList: bindActionCreators(getProductList, dispatch),
+//   };
+// };
+const mapDispatchToProps = {
+  getProductList
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App);
