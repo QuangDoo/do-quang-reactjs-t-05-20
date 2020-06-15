@@ -2,15 +2,21 @@ import React, { useState } from "react";
 import Layout from "../../components/layout";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
+import { connect } from "react-redux";
 import swal from "sweetalert";
-function Register() {
+import {
+  registerRequestAction,
+  registerSuccessAction,
+  registerFailAction,
+} from "./Register.action";
+function Register(props) {
   const [err, setErr] = useState("");
   const [valueRegister, setValueRegister] = useState({
     fullName: "",
     email: "",
     password: "",
   });
-  const onChange = (e) => {  
+  const onChange = (e) => {
     setValueRegister({
       ...valueRegister,
       [e.target.name]: e.target.value,
@@ -18,31 +24,30 @@ function Register() {
   };
   const onSubmitRegister = (e) => {
     e.preventDefault();
-    register(valueRegister);
+    props.registerAccount(valueRegister);
   };
   const history = useHistory();
-  const register = async (data) => {
-    try {
-      const result = await axios({
-        method: "POST",
-        url: "https://min-shop.herokuapp.com/rest/user/signUp",
-        data,
-      });
-      console.log(result);
-      history.push("/login");
-      swal({
-        title: "Register successfully",
-        icon: "success",
-        timer: 2000,
-        buttons: false,
-      });
-    } catch (err) {
-      // console.log(err.response.data.message);
-      setErr(err.response.data.message);
-      console.log(err);
-      
-    }
-  };
+  // const register = async (data) => {
+  //   try {
+  //     const result = await axios({
+  //       method: "POST",
+  //       url: "https://min-shop.herokuapp.com/rest/user/signUp",
+  //       data,
+  //     });
+  //     console.log(result);
+  //     history.push("/login");
+  //     swal({
+  //       title: "Register successfully",
+  //       icon: "success",
+  //       timer: 2000,
+  //       buttons: false,
+  //     });
+  //   } catch (err) {
+  //     // console.log(err.response.data.message);
+  //     setErr(err.response.data.message);
+  //     console.log(err);
+  //   }
+  // };
   return (
     <Layout productsInCart={[]}>
       <main>
@@ -130,5 +135,28 @@ function Register() {
     </Layout>
   );
 }
-
-export default Register;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    registerAccount: async (value) => {
+      dispatch(registerRequestAction());
+      try {
+        const result = await axios({
+          method: "POST",
+          url: "https://min-shop.herokuapp.com/rest/user/signUp",
+          value,
+        });
+        dispatch(registerSuccessAction(result));
+        // history.push("/login");
+        swal({
+          title: "Register successfully",
+          icon: "success",
+          timer: 2000,
+          buttons: false,
+        });
+      } catch (err) {
+        dispatch(registerFailAction(err))
+      }
+    },
+  };
+};
+export default connect(null,mapDispatchToProps)(Register);

@@ -147,7 +147,7 @@ const mapStateToProps = (state) => {
 // };
 const mapDispatchToProps = (dispatch) => {
   return {
-    getProductList: async (products) => {
+    getProductList: async () => {
       dispatch(productsListRequestAction());
       try {
         const resutl = await axios({

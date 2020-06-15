@@ -1,11 +1,11 @@
 import * as actionTypes from "./ProductDetail.action";
-const initialState = {
+const initiState = {
   data: null,
   loading: false,
   error: null,
 };
 
-function ProductDetailReducer(state = initialState, action) {
+function ProductDetailReducer(state = initiState, action) {
   switch (action.type) {
     case actionTypes.PRODUCTDETAIL_REQUEST:
       return {
@@ -26,7 +26,7 @@ function ProductDetailReducer(state = initialState, action) {
         error: action.error,
       };
     default:
-      return state;
+      return { ...state };
   }
 }
 export default ProductDetailReducer;

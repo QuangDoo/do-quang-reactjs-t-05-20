@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout";
 import { Link, useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 import axios from "axios";
+import {
+  loginRequestAction,
+  loginSuccessAction,
+  loginFailAction,
+} from "./Login.action";
 
 function Login(props) {
   const [valueLogin, setValueLogin] = useState({ email: "", password: "" });
   const [errMessage, setErrMessage] = useState("");
   const history = useHistory();
 
-  
   const onChangeValue = (e) => {
     setValueLogin({
       ...valueLogin,
@@ -17,24 +22,27 @@ function Login(props) {
   };
   const onSubmitLogin = (e) => {
     e.preventDefault();
-    login(valueLogin);
+    props.loginAccount(valueLogin);
   };
-  const login = async (data) => {
-    try {
-      const result = await axios({
-        method: "POST",
-        url: "https://min-shop.herokuapp.com/rest/user/signIn",
-        data,
-      });
-      localStorage.setItem("token", result.data.accessToken);
-      if (history.location.state.from.pathname) {
-        history.push(history.location.state.from.pathname);
-      }
-      window.location.reload();
-    } catch (err) {
-      setErrMessage(err.response.data.message);
-    }
-  };
+  useEffect(() => {
+    setErrMessage(props.error);
+  }, [props.error]);
+  // const login = async (data) => {
+  //   try {
+  //     const result = await axios({
+  //       method: "POST",
+  //       url: "https://min-shop.herokuapp.com/rest/user/signIn",
+  //       data,
+  //     });
+  //     localStorage.setItem("token", result.data.accessToken);
+  //     if (history.location.state.from.pathname) {
+  //       history.push(history.location.state.from.pathname);
+  //     }
+  //     window.location.reload();
+  //   } catch (err) {
+  //     setErrMessage(err.response.data.message);
+  //   }
+  // };
 
   return (
     <Layout productsInCart={[]}>
@@ -71,7 +79,7 @@ function Login(props) {
                 <div className="basic-login">
                   <h3 className="text-center mb-60">Login From Here</h3>
                   <form action="#" onSubmit={onSubmitLogin}>
-                    <span className="text-danger">{errMessage}</span>
+                    <span className="text-danger">{props.error}</span>
                     <label htmlFor="name">
                       Email Address <span>**</span>
                     </label>
@@ -120,4 +128,33 @@ function Login(props) {
   );
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    error: state.loginReducer.data,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginAccount: async (data) => {
+      dispatch(loginRequestAction());
+      try {
+        const result = await axios({
+          method: "POST",
+          url: "https://min-shop.herokuapp.com/rest/user/signIn",
+          data,
+        });
+        const token = localStorage.setItem("token", result.data.accessToken);
+        dispatch(loginSuccessAction(token));
+
+        // if (history.location.state.from.pathname) {
+        //   history.push(history.location.state.from.pathname);
+        // }
+        // window.location.reload();
+      } catch (err) {
+        dispatch(loginFailAction(err));
+      }
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

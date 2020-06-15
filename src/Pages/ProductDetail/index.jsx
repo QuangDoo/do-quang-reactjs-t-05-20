@@ -1,18 +1,25 @@
-import React from "react";
-import { withRouter, useParams } from "react-router-dom";
-
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Layout from "../../components/layout";
-import dataProduct from "../../product.json";
+import { connect } from "react-redux";
+import axios from "axios";
+import {
+  productDetailRequestAction,
+  productDetailSuccessAction,
+  productDetailFailAction,
+} from "./ProductDetail.action";
 function ProductDetail(props) {
   // dung useParams
-  const params = useParams()
+  const params = useParams();
   console.log(params);
-  
-  const product = dataProduct.data.find(
-    (elm) => elm.id == params.id
-  );
-  console.log(product);
-  
+  useEffect(() => {
+    const id = params.id;
+    props.getProducDetail(id);
+  }, []);
+  console.log(props.productDetail);
+
+  const product = props.productDetail;
+
   return (
     <Layout productsInCart={[]}>
       <main>
@@ -119,7 +126,9 @@ function ProductDetail(props) {
                   <h2 className="pro-details-title mb-15">{product.name}</h2>
                   <div className="details-price mb-20">
                     <span>{product.price.toLocaleString()}</span>
-                    <span className="old-price">{product.priceMax.toLocaleString()}</span>
+                    <span className="old-price">
+                      {product.priceMax.toLocaleString()}
+                    </span>
                   </div>
                   <div className="product-variant">
                     <div className="product-desc variant-item">
@@ -652,4 +661,25 @@ function ProductDetail(props) {
     </Layout>
   );
 }
-export default withRouter(ProductDetail);
+const mapStateToProps = (state) => {
+  return {
+    productDetail: state.productDetailReducer.data,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getProducDetail: async (id) => {
+      dispatch(productDetailRequestAction());
+      try {
+        const result = await axios({
+          method: "GET",
+          url: `https://min-shop.herokuapp.com/rest/product/${id}`,
+        });
+        dispatch(productDetailSuccessAction(result.data.data));
+      } catch (err) {
+        dispatch(productDetailFailAction(err));
+      }
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);
