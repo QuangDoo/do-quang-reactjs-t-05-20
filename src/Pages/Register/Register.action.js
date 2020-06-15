@@ -9,13 +9,13 @@ export function registerRequestAction() {
 }
 export function registerSuccessAction(token) {
   return {
-    type: REGISTER_REQUEST,
+    type: REGISTER_SUCCESS,
     token,
   };
 }
 export function registerFailAction(err) {
   return {
-    type: REGISTER_REQUEST,
+    type: REGISTER_FAIL,
     err,
   };
 }
