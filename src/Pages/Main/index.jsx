@@ -1,21 +1,19 @@
-import React, { useState, useContext, useEffect } from "react";
-import "./Main.css";
-import Layout from "../../components/layout";
-
-import SideBar from "../../components/Sidebar";
-import Content from "../../components/content";
-import ProductItem from "../../components/ProductItem";
-import data from "../../product.json";
-import { ThemeContext } from "../../index";
-import axios from "axios";
-import { getProductList } from "./Main.action";
+import React, { useContext, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import {
-  productsListRequestAction,
-  productsListSuccessAction,
-  productsListFailAction,
-} from "./Main.action";
+import Content from "../../components/content";
+import Layout from "../../components/layout";
+import ProductItem from "../../components/ProductItem";
+import SideBar from "../../components/Sidebar";
+import { ThemeContext } from "../../index";
+import data from "../../product.json";
+import { getProductList } from "./Main.action";
+import "./Main.css";
+
+// import {
+//   productsListRequestAction,
+//   productsListSuccessAction,
+//   productsListFailAction,
+// } from "./Main.action";
 function App(props) {
   const value = useContext(ThemeContext);
 
@@ -140,25 +138,7 @@ const mapStateToProps = (state) => {
     productsList: state.productsReducer.products,
   };
 };
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     getProductList: bindActionCreators(getProductList, dispatch),
-//   };
-// };
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getProductList: async () => {
-      dispatch(productsListRequestAction());
-      try {
-        const resutl = await axios({
-          method: "GET",
-          url: "https://min-shop.herokuapp.com/rest/product",
-        });
-        dispatch(productsListSuccessAction(resutl.data.data));
-      } catch (err) {
-        dispatch(productsListFailAction(err));
-      }
-    },
-  };
+const mapDispatchToProps = {
+    getProductList
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);

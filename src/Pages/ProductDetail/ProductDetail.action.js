@@ -1,3 +1,4 @@
+import axios from "axios";
 export const PRODUCTDETAIL_REQUEST = "PRODUCTDETAIL_REQUEST";
 export const PRODUCTDETAILT_SUCCESS = "PRODUCTDETAIL_SUCCESS";
 export const PRODUCTDETAIL_FAIL = "PRODUCTDETAIL_FAIL";
@@ -18,4 +19,19 @@ export function productDetailFailAction(err) {
     type: PRODUCTDETAIL_FAIL,
     err,
   };
+}
+export function productDetailAction(id){
+  return  async (dispatch) => {
+    dispatch(productDetailRequestAction());
+    try {
+      const result = await axios({
+        method: "GET",
+        url: `https://min-shop.herokuapp.com/rest/product/${id}`,
+      });
+      
+      dispatch(productDetailSuccessAction(result.data));
+    } catch (err) {
+      dispatch(productDetailFailAction(err));
+    }
+  }
 }

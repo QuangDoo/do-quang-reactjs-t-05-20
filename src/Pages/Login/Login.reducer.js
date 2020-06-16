@@ -17,7 +17,7 @@ function LoginReducer(state = initalSate, action) {
       return {
         ...state,
         loading: false,
-        data: action.data,
+        data: action.token,
       };
     case actionTypes.LOGIN_FAIL:
       return {

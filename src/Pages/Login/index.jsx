@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from "react";
-import Layout from "../../components/layout";
-import { Link, useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
-import {
-  loginRequestAction,
-  loginSuccessAction,
-  loginFailAction,
-} from "./Login.action";
+import { Link, useHistory } from "react-router-dom";
+import Layout from "../../components/layout";
+import loginAccountAction from "./Login.action";
 
 function Login(props) {
   const [valueLogin, setValueLogin] = useState({ email: "", password: "" });
@@ -20,29 +15,21 @@ function Login(props) {
       [e.target.name]: e.target.value,
     });
   };
-  const onSubmitLogin = (e) => {
+  const onSubmitLogin = async (e) => {
     e.preventDefault();
-    props.loginAccount(valueLogin);
+    try {
+      await props.loginAccount(valueLogin);
+      if (history.location.state.from.pathname) {
+        history.push(history.location.state.from.pathname);
+      }
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
   };
   useEffect(() => {
     setErrMessage(props.error);
   }, [props.error]);
-  // const login = async (data) => {
-  //   try {
-  //     const result = await axios({
-  //       method: "POST",
-  //       url: "https://min-shop.herokuapp.com/rest/user/signIn",
-  //       data,
-  //     });
-  //     localStorage.setItem("token", result.data.accessToken);
-  //     if (history.location.state.from.pathname) {
-  //       history.push(history.location.state.from.pathname);
-  //     }
-  //     window.location.reload();
-  //   } catch (err) {
-  //     setErrMessage(err.response.data.message);
-  //   }
-  // };
 
   return (
     <Layout productsInCart={[]}>
@@ -79,7 +66,7 @@ function Login(props) {
                 <div className="basic-login">
                   <h3 className="text-center mb-60">Login From Here</h3>
                   <form action="#" onSubmit={onSubmitLogin}>
-                    <span className="text-danger">{props.error}</span>
+                    <span className="text-danger">{errMessage}</span>
                     <label htmlFor="name">
                       Email Address <span>**</span>
                     </label>
@@ -130,31 +117,11 @@ function Login(props) {
 
 const mapStateToProps = (state) => {
   return {
-    error: state.loginReducer.data,
+    error: state.loginReducer.error,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loginAccount: async (data) => {
-      dispatch(loginRequestAction());
-      try {
-        const result = await axios({
-          method: "POST",
-          url: "https://min-shop.herokuapp.com/rest/user/signIn",
-          data,
-        });
-        const token = localStorage.setItem("token", result.data.accessToken);
-        dispatch(loginSuccessAction(token));
-
-        // if (history.location.state.from.pathname) {
-        //   history.push(history.location.state.from.pathname);
-        // }
-        // window.location.reload();
-      } catch (err) {
-        dispatch(loginFailAction(err));
-      }
-    },
-  };
+const mapDispatchToProps = {
+  loginAccount: loginAccountAction,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

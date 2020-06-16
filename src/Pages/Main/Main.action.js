@@ -20,17 +20,17 @@ export function productsListFailAction(err) {
     err,
   };
 }
-/*export async function getProductList() {
+export function getProductList() {
   return async (dispatch) => {
-    dispatch(loginRequestAction());
-    // try {
-    //   const resutl = await axios({
-    //     method: "GET",
-    //     url: "https://min-shop.herokuapp.com/rest/product",
-    //   });
-    //   dispatch(loginSuccessAction(resutl.data.data));
-    // } catch (err) {
-    //   dispatch(loginFailAction(err));
-    // }
+    dispatch(productsListRequestAction());
+    try {
+      const resutl = await axios({
+        method: "GET",
+        url: "https://min-shop.herokuapp.com/rest/product",
+      });
+      dispatch(productsListSuccessAction(resutl.data.data));
+    } catch (err) {
+      dispatch(productsListFailAction(err));
+    }
   };
-}*/
+}

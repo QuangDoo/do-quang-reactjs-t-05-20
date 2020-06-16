@@ -1,30 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-// import Main from "./Pages/Main";
-// import Register from "./Pages/Register";
-// import Login from "./Pages/Login";
-import * as serviceWorker from "./serviceWorker";
-import App from "./App";
-// import ProductDetail from "./Pages/ProductDetail";
-import {
-  Redirect,
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
-import PageNotFound from "./Pages/pageNotFound";
-
-import Loading from "./components/Loading";
-import store from "../src/store";
-import ProtectedRoute from "./components/ProtectedRoute";
 import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import store from "../src/store";
+import Loading from "./components/Loading";
+import ProtectedRoute from "./components/ProtectedRoute";
+import "./index.css";
+import PageNotFound from "./Pages/pageNotFound";
+import * as serviceWorker from "./serviceWorker";
+import App from "./App"; 
+
 const Main = React.lazy(() => import("./Pages/Main"));
 const Login = React.lazy(() => import("./Pages/Login"));
 const Register = React.lazy(() => import("./Pages/Register"));
 const ProductDetail = React.lazy(() => import("./Pages/ProductDetail"));
 export const ThemeContext = React.createContext("light");
-
 
 ReactDOM.render(
   <Provider store={store}>
@@ -84,4 +74,4 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.register();

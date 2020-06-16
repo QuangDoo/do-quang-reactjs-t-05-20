@@ -24,13 +24,7 @@ function ProductItem(props) {
               <Link to={`/product-detail/${props.id}`} title="Quick View">
                   <i className="fas fa-search" />
                 </Link>
-              {/* {token ? (
-                <Link to={`/product-detail/${props.id}`} title="Quick View">
-                  <i className="fas fa-search" />
-                </Link>
-              ) : (
-                <Link to={`/login`}><i className="fas fa-search" /></Link>
-              )} */}
+              
             </div>
           </div>
           <div className="product-content pr-0">

@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import Layout from "../../components/layout";
-import { connect } from "react-redux";
-import axios from "axios";
-import {
-  productDetailRequestAction,
-  productDetailSuccessAction,
-  productDetailFailAction,
-} from "./ProductDetail.action";
+import { productDetailAction } from "./ProductDetail.action";
 function ProductDetail(props) {
   // dung useParams
   const params = useParams();
@@ -19,7 +14,9 @@ function ProductDetail(props) {
   console.log(props.productDetail);
 
   const product = props.productDetail;
-
+  if (!product) {
+    return <div>loading</div>;
+  }
   return (
     <Layout productsInCart={[]}>
       <main>
@@ -666,20 +663,7 @@ const mapStateToProps = (state) => {
     productDetail: state.productDetailReducer.data,
   };
 };
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getProducDetail: async (id) => {
-      dispatch(productDetailRequestAction());
-      try {
-        const result = await axios({
-          method: "GET",
-          url: `https://min-shop.herokuapp.com/rest/product/${id}`,
-        });
-        dispatch(productDetailSuccessAction(result.data.data));
-      } catch (err) {
-        dispatch(productDetailFailAction(err));
-      }
-    },
-  };
+const mapDispatchToProps = {
+  getProducDetail: productDetailAction,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

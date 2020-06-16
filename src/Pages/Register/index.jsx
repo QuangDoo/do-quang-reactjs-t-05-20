@@ -1,14 +1,8 @@
-import React, { useState } from "react";
-import Layout from "../../components/layout";
-import { Link, useHistory } from "react-router-dom";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import swal from "sweetalert";
-import {
-  registerRequestAction,
-  registerSuccessAction,
-  registerFailAction,
-} from "./Register.action";
+import { Link, useHistory } from "react-router-dom";
+import Layout from "../../components/layout";
+import { registerAccountAction } from "./Register.action";
 function Register(props) {
   const [err, setErr] = useState("");
   const [valueRegister, setValueRegister] = useState({
@@ -16,6 +10,11 @@ function Register(props) {
     email: "",
     password: "",
   });
+  const history = useHistory();
+
+  useEffect(() => {
+    setErr(props.err);
+  }, []);
   const onChange = (e) => {
     setValueRegister({
       ...valueRegister,
@@ -26,28 +25,8 @@ function Register(props) {
     e.preventDefault();
     props.registerAccount(valueRegister);
   };
-  const history = useHistory();
-  // const register = async (data) => {
-  //   try {
-  //     const result = await axios({
-  //       method: "POST",
-  //       url: "https://min-shop.herokuapp.com/rest/user/signUp",
-  //       data,
-  //     });
-  //     console.log(result);
-  //     history.push("/login");
-  //     swal({
-  //       title: "Register successfully",
-  //       icon: "success",
-  //       timer: 2000,
-  //       buttons: false,
-  //     });
-  //   } catch (err) {
-  //     // console.log(err.response.data.message);
-  //     setErr(err.response.data.message);
-  //     console.log(err);
-  //   }
-  // };
+
+
   return (
     <Layout productsInCart={[]}>
       <main>
@@ -135,28 +114,12 @@ function Register(props) {
     </Layout>
   );
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    registerAccount: async (value) => {
-      dispatch(registerRequestAction());
-      try {
-        const result = await axios({
-          method: "POST",
-          url: "https://min-shop.herokuapp.com/rest/user/signUp",
-          value,
-        });
-        dispatch(registerSuccessAction(result));
-        // history.push("/login");
-        swal({
-          title: "Register successfully",
-          icon: "success",
-          timer: 2000,
-          buttons: false,
-        });
-      } catch (err) {
-        dispatch(registerFailAction(err))
-      }
-    },
-  };
+const mapStateToProps = (state) => {
+  return{
+    err: state.registerReducer.error
+  }
 };
-export default connect(null,mapDispatchToProps)(Register);
+const mapDispatchToProps = {
+  registerAccount: registerAccountAction,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
