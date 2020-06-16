@@ -21,17 +21,18 @@ export function registerFailAction(err) {
     err,
   };
 }
-export function registerAccountAction(value) {
+export function registerAccountAction(data) {
   return async (dispatch) => {
     dispatch(registerRequestAction());
     try {
       const result = await axios({
         method: "POST",
         url: "https://min-shop.herokuapp.com/rest/user/signUp",
-        value,
+        // luon luon la data
+        data,
       });
       dispatch(registerSuccessAction(result));
-      // history.push("/login");
+
       swal({
         title: "Register successfully",
         icon: "success",
@@ -39,6 +40,8 @@ export function registerAccountAction(value) {
         buttons: false,
       });
     } catch (err) {
+      console.log(err);
+
       dispatch(registerFailAction(err));
     }
   };

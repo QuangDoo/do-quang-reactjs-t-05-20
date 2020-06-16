@@ -12,20 +12,22 @@ function Register(props) {
   });
   const history = useHistory();
 
-  useEffect(() => {
-    setErr(props.err);
-  }, []);
   const onChange = (e) => {
     setValueRegister({
       ...valueRegister,
       [e.target.name]: e.target.value,
     });
   };
-  const onSubmitRegister = (e) => {
+  const onSubmitRegister = async (e) => {
     e.preventDefault();
-    props.registerAccount(valueRegister);
+    try {
+      await props.registerAccount(valueRegister);
+      history.push("/login");
+    } catch (err) {
+      console.log(err);
+      setErr(props.err);
+    }
   };
-
 
   return (
     <Layout productsInCart={[]}>
@@ -115,9 +117,9 @@ function Register(props) {
   );
 }
 const mapStateToProps = (state) => {
-  return{
-    err: state.registerReducer.error
-  }
+  return {
+    err: state.registerReducer.error,
+  };
 };
 const mapDispatchToProps = {
   registerAccount: registerAccountAction,

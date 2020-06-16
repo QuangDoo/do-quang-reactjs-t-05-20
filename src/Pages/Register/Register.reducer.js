@@ -17,7 +17,7 @@ function RegisterReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        data: action.data,
+        data: action.token,
       };
     case actionTypes.REGISTER_FAIL:
       return {

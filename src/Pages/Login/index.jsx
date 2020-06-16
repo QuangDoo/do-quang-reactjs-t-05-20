@@ -24,12 +24,10 @@ function Login(props) {
       }
       window.location.reload();
     } catch (err) {
-      console.log(err);
+      
+      setErrMessage(props.error);
     }
   };
-  useEffect(() => {
-    setErrMessage(props.error);
-  }, [props.error]);
 
   return (
     <Layout productsInCart={[]}>

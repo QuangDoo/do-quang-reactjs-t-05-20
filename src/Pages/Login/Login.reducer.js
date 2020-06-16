@@ -23,7 +23,7 @@ function LoginReducer(state = initalSate, action) {
       return {
         ...state,
         loading: false,
-        error: action.error,
+        error: action.err,
       };
     default:
       return state;
