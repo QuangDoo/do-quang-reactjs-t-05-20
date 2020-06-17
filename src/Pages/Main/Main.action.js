@@ -29,6 +29,7 @@ export function getProductList() {
         url: "https://min-shop.herokuapp.com/rest/product",
       });
       dispatch(productsListSuccessAction(resutl.data.data));
+      
     } catch (err) {
       dispatch(productsListFailAction(err));
     }

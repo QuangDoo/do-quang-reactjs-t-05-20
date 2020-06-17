@@ -22,6 +22,7 @@ ReactDOM.render(
       <React.Suspense fallback={<Loading />}>
         <ThemeContext.Provider value="black">
           <Switch>
+            
             <Route exact path="/" component={Main} />
 
             <Route exact path="/(login|dang-nhap)" component={Login} />

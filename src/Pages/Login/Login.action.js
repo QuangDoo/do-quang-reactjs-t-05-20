@@ -14,14 +14,13 @@ export function loginSuccessAction(token) {
     token,
   };
 }
-export function loginFailAction(err) {
+export function loginFailAction(error) {
   return {
     type: LOGIN_FAIL,
-    err,
+    error,
   };
 }
-export default function loginAccountAction(data) {
- 
+export default function loginAccountAction(data, history) {
   return async (dispatch) => {
     dispatch(loginRequestAction());
     try {
@@ -32,13 +31,13 @@ export default function loginAccountAction(data) {
       });
       localStorage.setItem("token", result.data.accessToken);
       dispatch(loginSuccessAction(result.data.accessToken));
-      
-      // if (history.location.state.from.pathname) {
-      //   history.push(history.location.state.from.pathname);
-      // }
-      // window.location.reload();
+      if (history.location.state.from.pathname) {
+        history.push(history.location.state.from.pathname);
+      }
     } catch (err) {
-      dispatch(loginFailAction(err));
+      console.log("err", err.response.message);
+
+      dispatch(loginFailAction(err.response.message));
     }
   };
 }

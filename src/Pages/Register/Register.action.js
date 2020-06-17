@@ -21,7 +21,7 @@ export function registerFailAction(err) {
     err,
   };
 }
-export function registerAccountAction(data) {
+export function registerAccountAction(data, history) {
   return async (dispatch) => {
     dispatch(registerRequestAction());
     try {
@@ -32,7 +32,7 @@ export function registerAccountAction(data) {
         data,
       });
       dispatch(registerSuccessAction(result));
-
+      history.push("./login");
       swal({
         title: "Register successfully",
         icon: "success",
@@ -40,9 +40,9 @@ export function registerAccountAction(data) {
         buttons: false,
       });
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data.message);
 
-      dispatch(registerFailAction(err));
+      dispatch(registerFailAction(err.response.data.message));
     }
   };
 }

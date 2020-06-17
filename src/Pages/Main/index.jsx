@@ -8,12 +8,9 @@ import { ThemeContext } from "../../index";
 import data from "../../product.json";
 import { getProductList } from "./Main.action";
 import "./Main.css";
+import Loader from "react-loader-spinner";
+import LoadingWaitGetData from "../LoadingWaitGetData";
 
-// import {
-//   productsListRequestAction,
-//   productsListSuccessAction,
-//   productsListFailAction,
-// } from "./Main.action";
 function App(props) {
   const value = useContext(ThemeContext);
 
@@ -118,6 +115,7 @@ function App(props) {
                     />
                   );
                 })}
+                <LoadingWaitGetData />
               </Content>
               <SideBar
                 onSort={onHightToLow}
@@ -139,6 +137,6 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = {
-    getProductList
+  getProductList,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);

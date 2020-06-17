@@ -6,8 +6,9 @@ import loginAccountAction from "./Login.action";
 
 function Login(props) {
   const [valueLogin, setValueLogin] = useState({ email: "", password: "" });
-  const [errMessage, setErrMessage] = useState("");
+
   const history = useHistory();
+  console.log(history);
 
   const onChangeValue = (e) => {
     setValueLogin({
@@ -18,14 +19,9 @@ function Login(props) {
   const onSubmitLogin = async (e) => {
     e.preventDefault();
     try {
-      await props.loginAccount(valueLogin);
-      if (history.location.state.from.pathname) {
-        history.push(history.location.state.from.pathname);
-      }
-      window.location.reload();
+      await props.loginAccount(valueLogin, history);
     } catch (err) {
-      
-      setErrMessage(props.error);
+      console.log(err);
     }
   };
 
@@ -64,7 +60,7 @@ function Login(props) {
                 <div className="basic-login">
                   <h3 className="text-center mb-60">Login From Here</h3>
                   <form action="#" onSubmit={onSubmitLogin}>
-                    <span className="text-danger">{errMessage}</span>
+                    <span className="text-danger">{props.error}</span>
                     <label htmlFor="name">
                       Email Address <span>**</span>
                     </label>

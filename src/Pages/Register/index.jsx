@@ -4,13 +4,14 @@ import { Link, useHistory } from "react-router-dom";
 import Layout from "../../components/layout";
 import { registerAccountAction } from "./Register.action";
 function Register(props) {
-  const [err, setErr] = useState("");
+  
   const [valueRegister, setValueRegister] = useState({
     fullName: "",
     email: "",
     password: "",
   });
   const history = useHistory();
+
 
   const onChange = (e) => {
     setValueRegister({
@@ -21,11 +22,11 @@ function Register(props) {
   const onSubmitRegister = async (e) => {
     e.preventDefault();
     try {
-      await props.registerAccount(valueRegister);
-      history.push("/login");
+      await props.registerAccount(valueRegister, history);
+      
     } catch (err) {
       console.log(err);
-      setErr(props.err);
+      
     }
   };
 
@@ -64,7 +65,7 @@ function Register(props) {
                 <div className="basic-login">
                   <h3 className="text-center mb-60">Sign Up From Here</h3>
                   <form action="#" onSubmit={onSubmitRegister}>
-                    <span className="text-danger">{err}</span>
+                    <span className="text-danger">{props.error}</span>
                     <label htmlFor="name">
                       Full Name <span>**</span>
                     </label>
@@ -118,7 +119,7 @@ function Register(props) {
 }
 const mapStateToProps = (state) => {
   return {
-    err: state.registerReducer.error,
+    error: state.registerReducer.error,
   };
 };
 const mapDispatchToProps = {
