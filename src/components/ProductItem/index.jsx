@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 
-// const token = localStorage.getItem("token");
+
 
 function ProductItem(props) {
   const onAddToCart = () => {
@@ -50,4 +51,7 @@ function ProductItem(props) {
     </>
   );
 }
-export default ProductItem;
+const mapDispatchToProps = {
+  
+}
+export default connect(null, mapDispatchToProps)(ProductItem);

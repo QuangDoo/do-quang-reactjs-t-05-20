@@ -1,6 +1,10 @@
 import React from "react";
 import Loader from "react-loader-spinner";
-export default function LoadingWaitGetData() {
+import { connect } from "react-redux";
+function LoadingWaitGetData(props) {
+  if (!props.loading) {
+    return null;
+  }
   return (
     <div
       style={{
@@ -15,3 +19,9 @@ export default function LoadingWaitGetData() {
     </div>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    loading: state.productsReducer.loading,
+  };
+};
+export default connect(mapStateToProps, null)(LoadingWaitGetData);

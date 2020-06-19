@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import Layout from "../../components/layout";
+import LoadingWaitGetData from "../LoadingWaitGetData";
 import { productDetailAction } from "./ProductDetail.action";
 function ProductDetail(props) {
   // dung useParams
@@ -12,7 +13,7 @@ function ProductDetail(props) {
     props.getProducDetail(id);
   }, []);
   console.log(props.productDetail);
-
+  let a =5;
   const product = props.productDetail;
   if (!product) {
     return <div>loading</div>;

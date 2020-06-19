@@ -6,10 +6,9 @@ import ProductItem from "../../components/ProductItem";
 import SideBar from "../../components/Sidebar";
 import { ThemeContext } from "../../index";
 import data from "../../product.json";
+import LoadingWaitGetData from "../LoadingWaitGetData";
 import { getProductList } from "./Main.action";
 import "./Main.css";
-import Loader from "react-loader-spinner";
-import LoadingWaitGetData from "../LoadingWaitGetData";
 
 function App(props) {
   const value = useContext(ThemeContext);
