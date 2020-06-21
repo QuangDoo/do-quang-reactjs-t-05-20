@@ -1,5 +1,4 @@
 import React from "react";
-
 function Content(props) {
   return (
     <>
@@ -9,7 +8,7 @@ function Content(props) {
           <div className="col-xl-5 col-lg-6 col-md-6">
             <div className="product-showing mb-40">
               <p>
-                Showing {props.count} of {props.count} 
+                Showing {props.count} of {props.count}
               </p>
             </div>
           </div>
@@ -26,7 +25,7 @@ function Content(props) {
           </div>
         </div>
       </div>
-    </>
+   </>
   );
 }
 

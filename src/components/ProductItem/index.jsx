@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-
-
-
+import { addProductToCart } from "./ProductItem.action";
 
 function ProductItem(props) {
   const onAddToCart = () => {
@@ -23,9 +21,8 @@ function ProductItem(props) {
                 <i className="fas fa-shopping-cart" onClick={onAddToCart} />
               </a>
               <Link to={`/product-detail/${props.id}`} title="Quick View">
-                  <i className="fas fa-search" />
-                </Link>
-              
+                <i className="fas fa-search" />
+              </Link>
             </div>
           </div>
           <div className="product-content pr-0">
@@ -52,6 +49,6 @@ function ProductItem(props) {
   );
 }
 const mapDispatchToProps = {
-  
-}
+  addProductInCart: addProductToCart,
+};
 export default connect(null, mapDispatchToProps)(ProductItem);

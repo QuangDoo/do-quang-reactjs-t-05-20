@@ -1,7 +1,7 @@
 import React from "react";
 import Cart from "../Cart";
-import { Link} from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 const logOut = () => {
   localStorage.removeItem("token");
   window.location.reload();
@@ -92,29 +92,28 @@ function Layout(props) {
               <div className="col-xl-2 col-lg-6 col-md-6 col-5 col-sm-7 pl-0">
                 <div className="header-right f-right">
                   <ul>
-                    <li className="search-btn">
-                      <a
-                        className="search-btn nav-search search-trigger"
-                        href="#"
-                      >
-                        <i className="fas fa-search" />
-                      </a>
-                    </li>
-                    <li className="login-btn">
-                      <Link to={`/login`}>
-                        <i className="far fa-user" />
-                      </Link>
-                      <ul className="subaccount">
-                        <li>
-                          <a onClick={logOut}>Log Out</a>
-                        </li>
-                      </ul>
-                    </li>
+                    
+                    {props.getEmail ? (
+                      <li className="login-btn">
+                        {props.getEmail}
+                        <ul className="subaccount">
+                          <li>
+                            <a onClick={logOut}>Log Out</a>
+                          </li>
+                        </ul>
+                      </li>
+                    ) : (
+                      <li className="login-btn">
+                        <Link to={`/login`}>
+                          <i className="far fa-user" />
+                        </Link>
+                      </li>
+                    )}
+
                     <Cart
                       data={props.productsInCart}
                       onDelete={props.onDelete}
                     />
-                   
                   </ul>
                 </div>
               </div>
@@ -242,4 +241,9 @@ function Layout(props) {
     </>
   );
 }
-export default Layout;
+const mapStateToProps = (state) => {
+  return {
+    getEmail: state.loginReducer.email,
+  };
+};
+export default connect(mapStateToProps)(Layout);

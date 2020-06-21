@@ -1,10 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import Layout from "../../components/layout";
 import LoadingWaitGetData from "../LoadingWaitGetData";
 import { productDetailAction } from "./ProductDetail.action";
 function ProductDetail(props) {
+  const [quantity, setQuantity] = useState(0);
+  const reduceQuantity = () => {
+    setQuantity({ quantity: quantity - 1 });
+  };
+  const increaseQuantity = () => {
+    setQuantity({ quantity: quantity + 1 });
+  };
   // dung useParams
   const params = useParams();
   console.log(params);
@@ -13,7 +20,6 @@ function ProductDetail(props) {
     props.getProducDetail(id);
   }, []);
   console.log(props.productDetail);
-  let a =5;
   const product = props.productDetail;
   if (!product) {
     return <div>loading</div>;
@@ -159,9 +165,19 @@ function ProductDetail(props) {
                         <form action="#">
                           <div className="plus-minus">
                             <div className="cart-plus-minus">
-                              <input type="text" defaultValue={1} />
-                              <div className="dec qtybutton">-</div>
-                              <div className="inc qtybutton">+</div>
+                              <input type="text" defaultValue={quantity} />
+                              <div
+                                className="dec qtybutton"
+                                onClick={reduceQuantity}
+                              >
+                                -
+                              </div>
+                              <div
+                                className="inc qtybutton"
+                                onClick={increaseQuantity}
+                              >
+                                +
+                              </div>
                             </div>
                           </div>
                           <button className="details-action-icon" type="submit">

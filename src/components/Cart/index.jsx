@@ -1,6 +1,6 @@
 import React from "react";
-
-export default function Cart(props) {
+import { connect } from "react-redux";
+function Cart(props) {
   return (
     <li className="d-shop-cart">
       <a href="#">
@@ -21,7 +21,7 @@ export default function Cart(props) {
               </h3>
               <div className="cart-price">
                 <span className="new">Price: {element.price}</span>
-                <span className="ml-4" >
+                <span className="ml-4">
                   <del>{element.priceMax}</del>
                 </span>
                 <span className="ml-5">x{element.quantity}</span>
@@ -62,3 +62,9 @@ export default function Cart(props) {
     </li>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    productCart : state.productInCartReducer.productInCart
+  }
+}
+export default connect(mapStateToProps,null)(Cart);

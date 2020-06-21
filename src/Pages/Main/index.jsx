@@ -8,6 +8,8 @@ import { ThemeContext } from "../../index";
 import data from "../../product.json";
 import LoadingWaitGetData from "../LoadingWaitGetData";
 import { getProductList } from "./Main.action";
+import BackToTop from "react-back-to-top-button";
+
 import "./Main.css";
 
 function App(props) {
@@ -17,7 +19,7 @@ function App(props) {
   const [productList, setProductsList] = useState([]);
   //add cart
   const [productsInCart, setProductsInCart] = useState([]);
-
+ 
   useEffect(() => {
     if (props.productsList) {
       setProductsList(props.productsList);
@@ -27,7 +29,8 @@ function App(props) {
   useEffect(() => {
     props.getProductList();
   }, []);
-
+ 
+ 
   const AddProductToCart = (newProduct) => {
     let productCart = {
       id: newProduct.id,
@@ -104,6 +107,14 @@ function App(props) {
         <section className="shop-area pt-150 pb-100">
           <div className="container">
             <div className="row">
+            <BackToTop
+        showOnScrollUp
+        showAt={100}
+        speed={1500}
+        easing="easeInOutQuint"
+      >
+        <img className="back-to-top" src="./assets/up-arrow.png"/>
+      </BackToTop>
               <Content count={productList.length}>
                 {productList.map((elm) => {
                   return (

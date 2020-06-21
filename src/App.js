@@ -5,6 +5,7 @@ import Layout from "./components/layout/index";
 import SideBar from "./components/Sidebar";
 import Content from "./components/content";
 import ProductItem from "./components/ProductItem";
+
 import data from "./product.json";
 
 function App() {
@@ -14,8 +15,7 @@ function App() {
   const [productsInCart, setProductsInCart] = useState([]);
   // search product
   const [keywords, setKeyWords] = useState("");
-  // resutl
-  const [resultSearch , setResultSearch] = useState([]);
+  
 
   const AddProductToCart = (newProduct) => {
     let productCart = {
@@ -83,15 +83,18 @@ function App() {
   const onSearchProduct = (keywords) => {
     setKeyWords(keywords);
   };
-  useEffect(()=>{
-    const result = productList.filter(product => product.name.toLowerCase().includes(keywords))
-  })
+  // useEffect(() => {
+  //   const result = productList.filter((product) =>
+  //     product.name.toLowerCase().includes(keywords)
+  //   );
+  // });
   return (
     <Layout productsInCart={productsInCart} onDelete={onDelete}>
       <main>
         <section className="shop-area pt-150 pb-100">
           <div className="container">
             <div className="row">
+              
               <Content count={productList.length}>
                 {productList.map((elm) => {
                   return (

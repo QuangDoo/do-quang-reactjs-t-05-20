@@ -1,5 +1,6 @@
 import * as actionTypes from "../Login/Login.action";
 const initalSate = {
+  email: null,
   data: null,
   loading: false,
   error: null,
@@ -18,6 +19,12 @@ function LoginReducer(state = initalSate, action) {
         ...state,
         loading: false,
         data: action.token,
+      };
+    case actionTypes.LOGIN_GETEMAIL:
+      return {
+        ...state,
+        loading: false,
+        email: action.email,
       };
     case actionTypes.LOGIN_FAIL:
       return {
