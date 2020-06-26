@@ -20,6 +20,7 @@ function Login(props) {
     e.preventDefault();
     try {
       await props.loginAccount(valueLogin, history);
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }

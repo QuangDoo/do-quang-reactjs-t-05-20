@@ -5,7 +5,9 @@ import Layout from "./components/layout/index";
 import SideBar from "./components/Sidebar";
 import Content from "./components/content";
 import ProductItem from "./components/ProductItem";
+import { Widget } from 'react-chat-widget';
 
+import 'react-chat-widget/lib/styles.css';
 import data from "./product.json";
 
 function App() {
@@ -83,11 +85,7 @@ function App() {
   const onSearchProduct = (keywords) => {
     setKeyWords(keywords);
   };
-  // useEffect(() => {
-  //   const result = productList.filter((product) =>
-  //     product.name.toLowerCase().includes(keywords)
-  //   );
-  // });
+  
   return (
     <Layout productsInCart={productsInCart} onDelete={onDelete}>
       <main>

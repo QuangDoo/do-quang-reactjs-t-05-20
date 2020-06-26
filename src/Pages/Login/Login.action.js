@@ -41,7 +41,9 @@ export default function loginAccountAction(data, history) {
       dispatch(loginGetInfoAccAction(data.email));
       if (history.location.state.from.pathname) {
         history.push(history.location.state.from.pathname);
+        
       }
+     
     } catch (err) {
       console.log("err", err.response.message);
 

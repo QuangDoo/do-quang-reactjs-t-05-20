@@ -1,5 +1,6 @@
 import * as actionTypes from "./Register.action";
 const initialState = {
+  name: null,
   data: null,
   loading: false,
   error: null,
@@ -18,6 +19,11 @@ function RegisterReducer(state = initialState, action) {
         ...state,
         loading: false,
         data: action.token,
+      };
+    case actionTypes.REGISTER_FULLNAME:
+      return {
+        ...state,
+        name: action.name,
       };
     case actionTypes.REGISTER_FAIL:
       return {

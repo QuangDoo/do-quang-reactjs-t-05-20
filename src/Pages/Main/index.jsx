@@ -9,6 +9,9 @@ import data from "../../product.json";
 import LoadingWaitGetData from "../LoadingWaitGetData";
 import { getProductList } from "./Main.action";
 import BackToTop from "react-back-to-top-button";
+import { Widget, addResponseMessage } from "react-chat-widget";
+
+import "react-chat-widget/lib/styles.css";
 
 import "./Main.css";
 
@@ -19,7 +22,7 @@ function App(props) {
   const [productList, setProductsList] = useState([]);
   //add cart
   const [productsInCart, setProductsInCart] = useState([]);
- 
+
   useEffect(() => {
     if (props.productsList) {
       setProductsList(props.productsList);
@@ -29,8 +32,7 @@ function App(props) {
   useEffect(() => {
     props.getProductList();
   }, []);
- 
- 
+
   const AddProductToCart = (newProduct) => {
     let productCart = {
       id: newProduct.id,
@@ -101,27 +103,43 @@ function App(props) {
     });
     setProductsList(newProducts);
   };
+  // chat box
+  useEffect(() => {
+    addResponseMessage("Welcome to Light Shop");
+    addResponseMessage("This feature has not developed yet :)");
+  }, []);
+
+  const handleNewUserMessage = (newMessage) => {
+    console.log(`New message incoming! ${newMessage}`);
+    // Now send the message throught the backend API
+  };
   return (
     <Layout productsInCart={productsInCart} onDelete={onDelete}>
       <main>
         <section className="shop-area pt-150 pb-100">
           <div className="container">
             <div className="row">
-            <BackToTop
-        showOnScrollUp
-        showAt={100}
-        speed={1500}
-        easing="easeInOutQuint"
-      >
-        <img className="back-to-top" src="./assets/up-arrow.png"/>
-      </BackToTop>
+              <BackToTop
+                showOnScrollUp
+                showAt={100}
+                speed={1500}
+                easing="easeInOutQuint"
+              >
+                <img className="back-to-top" src="./assets/up-arrow.png" />
+              </BackToTop>
+              <Widget
+                handleNewUserMessage={handleNewUserMessage}
+                handleNewUserMessage={handleNewUserMessage}
+                title="Client consultant"
+                subtitle="Customer support"
+              />
               <Content count={productList.length}>
                 {productList.map((elm) => {
                   return (
                     <ProductItem
                       {...elm}
                       imageURL={elm.image}
-                      onAddProduct={AddProductToCart}
+                      // onAddProduct={AddProductToCart}
                     />
                   );
                 })}

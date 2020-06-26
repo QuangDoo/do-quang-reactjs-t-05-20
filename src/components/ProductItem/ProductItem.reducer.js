@@ -7,33 +7,24 @@ const initState = {
 };
 function ProductInCartReducer(state = initState, action) {
   switch (action.type) {
-    case actionTypes.ADD_PRODUCT_TO_CART_REQUEST:
-      return {
-        ...state,
-        loading: true,
-      };
-
     case actionTypes.ADD_PRODUCT_TO_CART_SUCCESS: {
-      const newProduct = [...state.productInCart];
-      const index = newProduct.findIndex(
+      const newCart = [...state.productInCart];
+      const index = newCart.findIndex(
         (product) => product.id === action.product.id
       );
       if (index >= 0) {
-        newProduct[index] = {
+        newCart[index] = {
           ...state.productInCart,
-          quantity: newProduct[index].quantity + 1,
+          quantity: newCart[index].quantity + 1,
         };
       } else {
-        state.productInCart = [...state.productInCart, { ...action.product }];
+        newCart.push({
+          id: newCart.id,
+        });
       }
       return { ...state, loading: false };
     }
-    case actionTypes.ADD_PRODUCT_TO_CART_FAIL:
-      return {
-        ...state,
-        loading: false,
-        error: action.error,
-      };
+
     default:
       return state;
   }

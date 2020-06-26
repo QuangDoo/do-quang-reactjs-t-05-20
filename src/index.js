@@ -8,12 +8,13 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import "./index.css";
 import PageNotFound from "./Pages/pageNotFound";
 import * as serviceWorker from "./serviceWorker";
-import App from "./App"; 
+import App from "./App";
 
 const Main = React.lazy(() => import("./Pages/Main"));
 const Login = React.lazy(() => import("./Pages/Login"));
 const Register = React.lazy(() => import("./Pages/Register"));
 const ProductDetail = React.lazy(() => import("./Pages/ProductDetail"));
+const CheckOut = React.lazy(() => import("./Pages/CheckOut"));
 export const ThemeContext = React.createContext("light");
 
 ReactDOM.render(
@@ -22,7 +23,6 @@ ReactDOM.render(
       <React.Suspense fallback={<Loading />}>
         <ThemeContext.Provider value="black">
           <Switch>
-            
             <Route exact path="/" component={Main} />
 
             <Route exact path="/(login|dang-nhap)" component={Login} />
@@ -35,6 +35,11 @@ ReactDOM.render(
             >
               <ProductDetail />
             </ProtectedRoute>
+            <Route
+              exact
+              path="/(shopping-cart|gio-hang)"
+              component={CheckOut}
+            />
             {/* props render */}
             {/* <Route
             exact

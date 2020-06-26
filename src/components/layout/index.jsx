@@ -92,7 +92,6 @@ function Layout(props) {
               <div className="col-xl-2 col-lg-6 col-md-6 col-5 col-sm-7 pl-0">
                 <div className="header-right f-right">
                   <ul>
-                    
                     {props.getEmail ? (
                       <li className="login-btn">
                         {props.getEmail}

@@ -2,6 +2,7 @@ import axios from "axios";
 import swal from "sweetalert";
 export const REGISTER_REQUEST = "REGISTER_REQUEST";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_FULLNAME = " REGISTER_FULLNAME";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 
 export function registerRequestAction() {
@@ -13,6 +14,12 @@ export function registerSuccessAction(token) {
   return {
     type: REGISTER_SUCCESS,
     token,
+  };
+}
+export function registerGetFullNameAction(name) {
+  return {
+    type: REGISTER_FULLNAME,
+    name,
   };
 }
 export function registerFailAction(err) {
@@ -31,7 +38,9 @@ export function registerAccountAction(data, history) {
         // luon luon la data
         data,
       });
+
       dispatch(registerSuccessAction(result));
+      dispatch(registerGetFullNameAction(data.username));
       history.push("./login");
       swal({
         title: "Register successfully",

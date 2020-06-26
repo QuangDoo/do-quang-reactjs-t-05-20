@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 function Cart(props) {
   return (
     <li className="d-shop-cart">
@@ -52,7 +53,7 @@ function Cart(props) {
         </li>
         <li>
           <div className="checkout-link">
-            <a href="#">Shopping Cart</a>
+            <Link to='/shopping-cart'>Shopping Cart</Link>
             <a className="red-color" href="#">
               Checkout
             </a>
@@ -64,7 +65,7 @@ function Cart(props) {
 }
 const mapStateToProps = (state) => {
   return {
-    productCart : state.productInCartReducer.productInCart
-  }
-}
-export default connect(mapStateToProps,null)(Cart);
+    productCart: state.productInCartReducer.productInCart,
+  };
+};
+export default connect(mapStateToProps, null)(Cart);
