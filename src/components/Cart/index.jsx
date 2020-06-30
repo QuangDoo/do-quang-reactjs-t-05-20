@@ -6,10 +6,10 @@ function Cart(props) {
     <li className="d-shop-cart">
       <a href="#">
         <i className="fas fa-shopping-cart" />
-        <span className="cart-count">{props.data.length}</span>
+        <span className="cart-count">{props.productCart.length}</span>
       </a>
       <ul className="minicart">
-        {props.data.map((element) => (
+        {props.productCart.map((element) => (
           <li key={element.id}>
             <div className="cart-img">
               <a href="#">

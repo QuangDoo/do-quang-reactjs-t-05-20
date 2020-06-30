@@ -2,27 +2,22 @@ import * as actionTypes from "./ProductItem.action";
 
 const initState = {
   productInCart: [],
-  loading: false,
-  error: null,
 };
 function ProductInCartReducer(state = initState, action) {
+  console.log("reducer", action);
   switch (action.type) {
     case actionTypes.ADD_PRODUCT_TO_CART_SUCCESS: {
       const newCart = [...state.productInCart];
       const index = newCart.findIndex(
-        (product) => product.id === action.product.id
+        (product) => product.id === action.cartProduct.id
       );
       if (index >= 0) {
-        newCart[index] = {
-          ...state.productInCart,
-          quantity: newCart[index].quantity + 1,
-        };
+        newCart[index].quantity += 1;
       } else {
-        newCart.push({
-          id: newCart.id,
-        });
+        newCart.push(action.cartProduct);
       }
-      return { ...state, loading: false };
+      state.productInCart = newCart;
+      return { ...state };
     }
 
     default:

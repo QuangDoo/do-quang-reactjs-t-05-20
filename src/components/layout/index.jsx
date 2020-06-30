@@ -2,15 +2,30 @@ import React from "react";
 import Cart from "../Cart";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import DarkTheme, { createTheme } from "react-dark-theme";
+
 const logOut = () => {
   localStorage.removeItem("token");
   window.location.reload();
 };
 
 function Layout(props) {
+  // theme mode
+  const lightTheme = {
+    background: "white",
+    color: "black",
+  };
+
+  const darkTheme = {
+    background: "black",
+    color: "white",
+  };
+  const myTheme = createTheme(darkTheme, lightTheme);
   return (
     <>
-      <header>
+      <header
+        style={{ backgroundColor: myTheme.background, color: myTheme.color }}
+      >
         <div id="header-sticky" className="header-area box-90 sticky-header">
           <div className="container-fluid">
             <div className="row align-items-center">
@@ -113,6 +128,7 @@ function Layout(props) {
                       data={props.productsInCart}
                       onDelete={props.onDelete}
                     />
+                    <DarkTheme light={lightTheme} dark={darkTheme} />
                   </ul>
                 </div>
               </div>
@@ -141,7 +157,7 @@ function Layout(props) {
                       <img src="./assets/logo_shop.png" alt="" />
                     </a>
                   </div>
-                  <p>
+                  <p style={{ color: myTheme.color }}>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                     sed do eiusmod tempor incididunt ut labore et dolore mag na
                     aliqua. Ut enim ad minim veniam, quis nostrud exercitation

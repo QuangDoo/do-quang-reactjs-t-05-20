@@ -10,7 +10,6 @@ import LoadingWaitGetData from "../LoadingWaitGetData";
 import { getProductList } from "./Main.action";
 import BackToTop from "react-back-to-top-button";
 import { Widget, addResponseMessage } from "react-chat-widget";
-
 import "react-chat-widget/lib/styles.css";
 
 import "./Main.css";
@@ -108,13 +107,14 @@ function App(props) {
     addResponseMessage("Welcome to Light Shop");
     addResponseMessage("This feature has not developed yet :)");
   }, []);
-
+  
   const handleNewUserMessage = (newMessage) => {
     console.log(`New message incoming! ${newMessage}`);
     // Now send the message throught the backend API
   };
   return (
     <Layout productsInCart={productsInCart} onDelete={onDelete}>
+
       <main>
         <section className="shop-area pt-150 pb-100">
           <div className="container">

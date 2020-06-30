@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import Layout from "../../components/layout";
 import LoadingWaitGetData from "../LoadingWaitGetData";
+
 import { productDetailAction } from "./ProductDetail.action";
+import { FacebookShareButton, FacebookIcon } from "react-share";
 function ProductDetail(props) {
   const [quantity, setQuantity] = useState(0);
   const reduceQuantity = () => {
@@ -24,6 +26,7 @@ function ProductDetail(props) {
   if (!product) {
     return <div>loading</div>;
   }
+
   return (
     <Layout productsInCart={[]}>
       <main>
@@ -180,8 +183,12 @@ function ProductDetail(props) {
                               </div>
                             </div>
                           </div>
-                          <button className="details-action-icon" type="submit">
+                          <button className="details-action-icon" >
                             <i className="fas fa-heart" />
+                            <FacebookShareButton
+                            
+                              url={`https://quang-reactjs-t-05-20.netlify.app/product-detail/${product.id}`}
+                            />
                           </button>
                           <div className="details-cart mt-40">
                             <button className="btn theme-btn">
