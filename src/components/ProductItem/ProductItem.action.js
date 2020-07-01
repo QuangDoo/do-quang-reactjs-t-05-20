@@ -1,6 +1,5 @@
-export const ADD_PRODUCT_TO_CART_REQUEST = "ADD_PRODUCT_TO_CART_REQUEST";
 export const ADD_PRODUCT_TO_CART_SUCCESS = "ADD_PRODUCT_TO_CART_SUCCESS";
-export const ADD_PRODUCT_TO_CART_FAIL = "ADD_PRODUCT_TO_CART_FAIL";
+export const DELETE_PRODUCT_CART = "DELETE_PRODUCT_CART";
 
 export function addProductToCartSuccesstAction(cartProduct) {
   return {
@@ -8,7 +7,12 @@ export function addProductToCartSuccesstAction(cartProduct) {
     cartProduct,
   };
 }
-
+export function deleteProductInCartAction(productDelete) {
+  return {
+    type: DELETE_PRODUCT_CART,
+    productDelete,
+  };
+}
 export function addProductToCart(product) {
   const cartProduct = {
     id: product.id,
@@ -20,5 +24,12 @@ export function addProductToCart(product) {
   };
   return (dispatch) => {
     dispatch(addProductToCartSuccesstAction(cartProduct));
+  };
+}
+export function deleteProductInCart(productId) {
+  console.log(productId);
+  
+  return (dispatch) => {
+    dispatch(deleteProductInCartAction(productId));
   };
 }

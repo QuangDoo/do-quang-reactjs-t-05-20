@@ -9,7 +9,7 @@ export function loginRequestAction() {
     type: LOGIN_REQUEST,
   };
 }
-export function loginSuccessAction(token, name) {
+export function loginSuccessAction(token) {
   return {
     type: LOGIN_SUCCESS,
     token,

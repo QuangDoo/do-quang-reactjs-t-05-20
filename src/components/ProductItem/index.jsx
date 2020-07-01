@@ -18,10 +18,7 @@ function ProductItem(props) {
             </a>
             <div className="product-action text-center">
               <a title="Shoppingb Cart">
-                <i
-                  className="fas fa-shopping-cart"
-                  onClick={onAddToCart}
-                />
+                <i className="fas fa-shopping-cart" onClick={onAddToCart} />
               </a>
               <Link to={`/product-detail/${props.id}`} title="Quick View">
                 <i className="fas fa-search" />
@@ -51,6 +48,7 @@ function ProductItem(props) {
     </>
   );
 }
+
 const mapDispatchToProps = {
   addProductInCart: addProductToCart,
 };

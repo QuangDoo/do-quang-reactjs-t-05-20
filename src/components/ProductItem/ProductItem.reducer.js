@@ -19,7 +19,15 @@ function ProductInCartReducer(state = initState, action) {
       state.productInCart = newCart;
       return { ...state };
     }
+    case actionTypes.DELETE_PRODUCT_CART: {
+      const newCartDelete = [...state.productInCart].filter(
+        (pd) => pd.id !== action.productDelete
+      );
+      state.productInCart = newCartDelete;
+      console.log(newCartDelete);
 
+      return { ...state };
+    }
     default:
       return state;
   }

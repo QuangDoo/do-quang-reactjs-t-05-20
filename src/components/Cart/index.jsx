@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import {deleteProductInCart} from "../ProductItem/ProductItem.action"
 function Cart(props) {
   return (
     <li className="d-shop-cart">
@@ -33,7 +34,7 @@ function Cart(props) {
                 <i
                   className="far fa-trash-alt"
                   onClick={() => {
-                    props.onDelete(element.id);
+                    props.deleteProductInCart(element.id);
                   }}
                 />
               </a>
@@ -45,7 +46,7 @@ function Cart(props) {
           <div className="total-price">
             <span className="f-left">Total:</span>
             <span className="f-right">
-              {props.data.reduce((totalPrice, product) => {
+              {props.productCart.reduce((totalPrice, product) => {
                 return (totalPrice += product.price * product.quantity);
               }, 0)}
             </span>
@@ -63,9 +64,12 @@ function Cart(props) {
     </li>
   );
 }
+const mapDispatchToProps={
+  deleteProductInCart : deleteProductInCart
+}
 const mapStateToProps = (state) => {
   return {
     productCart: state.productInCartReducer.productInCart,
   };
 };
-export default connect(mapStateToProps, null)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
