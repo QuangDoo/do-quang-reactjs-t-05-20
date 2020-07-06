@@ -25,7 +25,20 @@ function ProductInCartReducer(state = initState, action) {
       );
       state.productInCart = newCartDelete;
       console.log(newCartDelete);
+      return { ...state };
+    }
+    case actionTypes.QUANTITY_PRODUCT_CART: {
+      console.log(action.index);
 
+      const newCart = [...state.productInCart];
+      if (action.isQuantity) {
+        newCart[action.index].quantity += 1;
+      } else {
+        if (newCart[action.index].quantity > 1) {
+          newCart[action.index].quantity -= 1;
+        }
+      }
+      state.productInCart = newCart;
       return { ...state };
     }
     default:

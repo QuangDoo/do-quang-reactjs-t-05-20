@@ -15,6 +15,7 @@
     "react-chat-widget": "^3.0.5",
     "react-dark-theme": "^1.1.1",
     "react-dom": "^16.13.1",
+    "react-google-login": "^5.1.20",
     "react-loader-spinner": "^3.1.14",
     "react-messenger-customer-chat": "^0.7.2",
     "react-promise-tracker": "^2.1.0",

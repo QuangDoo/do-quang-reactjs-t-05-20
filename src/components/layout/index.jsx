@@ -96,7 +96,7 @@ function Layout(props) {
                             <Link to={`/register`}>Register</Link>
                           </li>
                           <li>
-                            <Link to={`/cart`}>Shoping Cart</Link>
+                            <Link to={`/shopping-cart`}>Shoping Cart</Link>
                           </li>
                         </ul>
                       </li>
@@ -158,10 +158,7 @@ function Layout(props) {
                     </a>
                   </div>
                   <p style={{ color: myTheme.color }}>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore mag na
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  Trải nghiệm mua sắm Online với hàng ngàn sản phẩm khác nhau, uy tín hàng đầu tại Việt Nam. Hàng chính hãng giá cạnh tranh, giao nhanh trong ngày, hỗ trợ tư vấn 24/7, Mua ngay! Giá Tốt Nhất Thị Trường. Cam Kết Hàng Chính Hãng. Giao Hàng An Toàn Tận Tay.
                   </p>
                   <div className="footer-time d-flex mt-30">
                     <div className="time-icon">
@@ -169,7 +166,7 @@ function Layout(props) {
                     </div>
                     <div className="time-text">
                       <span>Got Questions ? Call us 24/7!</span>
-                      <h2>(0600) 874 548</h2>
+                      <h2>911</h2>
                     </div>
                   </div>
                 </div>

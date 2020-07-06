@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import Layout from "../../components/layout";
 import loginAccountAction from "./Login.action";
+import GoogleLogin, { GoogleLogout } from "react-google-login";
 
 function Login(props) {
   const [valueLogin, setValueLogin] = useState({ email: "", password: "" });
@@ -20,12 +21,14 @@ function Login(props) {
     e.preventDefault();
     try {
       await props.loginAccount(valueLogin, history);
-      window.location.reload();
     } catch (err) {
       console.log(err);
     }
   };
-
+  // login by gg
+  const responseGoogle = (response) => {
+    console.log(response);
+  };
   return (
     <Layout productsInCart={[]}>
       <main>
@@ -92,6 +95,22 @@ function Login(props) {
                       </span>
                     </div>
                     <button className="btn theme-btn-2 w-100">Login Now</button>
+                    <GoogleLogin
+                      clientId="205419541031-6mmb1vo98f0afnrbsu4tg1f6hglstcen.apps.googleusercontent.com"
+                      render={(props) => (
+                        <button
+                          onClick={props.onClick}
+                          disabled={props.disabled}
+                        >
+                          Sign In Google account
+                        </button>
+                      )}
+                      buttonText="Login"
+                      onSuccess={responseGoogle}
+                      onFailure={responseGoogle}
+                      cookiePolicy={"single_host_origin"}
+                    />
+                    
                     <div className="or-divide">
                       <span>or</span>
                     </div>

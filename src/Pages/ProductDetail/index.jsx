@@ -24,7 +24,12 @@ function ProductDetail(props) {
   console.log(props.productDetail);
   const product = props.productDetail;
   if (!product) {
-    return <div>loading</div>;
+    return (
+      <>
+        {" "}
+        <LoadingWaitGetData />
+      </>
+    );
   }
 
   return (
@@ -183,12 +188,11 @@ function ProductDetail(props) {
                               </div>
                             </div>
                           </div>
-                          <button className="details-action-icon" >
+                          <FacebookShareButton
+                            url={`https://quang-reactjs-t-05-20.netlify.app/product-detail/${product.id}`}
+                          />
+                          <button className="details-action-icon">
                             <i className="fas fa-heart" />
-                            <FacebookShareButton
-                            
-                              url={`https://quang-reactjs-t-05-20.netlify.app/product-detail/${product.id}`}
-                            />
                           </button>
                           <div className="details-cart mt-40">
                             <button className="btn theme-btn">

@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import {deleteProductInCart} from "../ProductItem/ProductItem.action"
+import { deleteProductInCart } from "../ProductItem/ProductItem.action";
+import { quantityProductInCart } from "../ProductItem/ProductItem.action";
 function Cart(props) {
   return (
     <li className="d-shop-cart">
@@ -10,7 +11,7 @@ function Cart(props) {
         <span className="cart-count">{props.productCart.length}</span>
       </a>
       <ul className="minicart">
-        {props.productCart.map((element) => (
+        {props.productCart.map((element,index) => (
           <li key={element.id}>
             <div className="cart-img">
               <a href="#">
@@ -26,7 +27,9 @@ function Cart(props) {
                 <span className="ml-4">
                   <del>{element.priceMax}</del>
                 </span>
-                <span className="ml-5">x{element.quantity}</span>
+                <span onClick={()=>{props.quantityProductsInCart(index,false)}}>-</span>
+                <span className="ml-2 mr-2">x{element.quantity}</span>
+                <span onClick={()=>{props.quantityProductsInCart(index,true)}}>+</span>
               </div>
             </div>
             <div className="del-icon">
@@ -54,7 +57,7 @@ function Cart(props) {
         </li>
         <li>
           <div className="checkout-link">
-            <Link to='/shopping-cart'>Shopping Cart</Link>
+            <Link to="/shopping-cart">Shopping Cart</Link>
             <a className="red-color" href="#">
               Checkout
             </a>
@@ -64,9 +67,10 @@ function Cart(props) {
     </li>
   );
 }
-const mapDispatchToProps={
-  deleteProductInCart : deleteProductInCart
-}
+const mapDispatchToProps = {
+  deleteProductInCart: deleteProductInCart,
+  quantityProductsInCart: quantityProductInCart,
+};
 const mapStateToProps = (state) => {
   return {
     productCart: state.productInCartReducer.productInCart,

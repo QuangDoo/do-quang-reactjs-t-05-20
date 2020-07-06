@@ -2,11 +2,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addProductToCart } from "./ProductItem.action";
+import  { createTheme } from "react-dark-theme";
 
 function ProductItem(props) {
   const onAddToCart = () => {
     return props.addProductInCart(props);
   };
+  const lightTheme = {
+    background: "white",
+    color: "black",
+  };
+
+  const darkTheme = {
+    background: "black",
+    color: "white",
+  };
+  const myTheme = createTheme(darkTheme, lightTheme);
 
   return (
     <>
@@ -30,11 +41,11 @@ function ProductItem(props) {
               <a href="#">{props.type}</a>
             </div>
             <h4>
-              <span className="shopInfor_shopName" href="#">
+              <span className="shopInfor_shopName" style={{ color: myTheme.color }}  href="#">
                 {props.shopInfo.shop_name}
               </span>
               <br />
-              <a href="#">{props.name}</a>
+              <a href="#" style={{ color: myTheme.color }}>{props.name}</a>
             </h4>
             <div className="product-meta">
               <div className="pro-price">
