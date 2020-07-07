@@ -35,11 +35,9 @@ ReactDOM.render(
             >
               <ProductDetail />
             </ProtectedRoute>
-            <Route
-              exact
-              path="/(shopping-cart|gio-hang)"
-              component={CheckOut}
-            />
+            <ProtectedRoute>
+              <Route exact path="/(check-out|hoa-don)" component={CheckOut} />
+            </ProtectedRoute>
             {/* props render */}
             {/* <Route
             exact

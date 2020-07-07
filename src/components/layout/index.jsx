@@ -96,7 +96,7 @@ function Layout(props) {
                             <Link to={`/register`}>Register</Link>
                           </li>
                           <li>
-                            <Link to={`/shopping-cart`}>Shoping Cart</Link>
+                            <Link to={`/check-out`}>Shoping Cart</Link>
                           </li>
                         </ul>
                       </li>

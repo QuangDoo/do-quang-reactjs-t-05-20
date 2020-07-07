@@ -44,7 +44,6 @@ function Cart(props) {
             </div>
           </li>
         ))}
-
         <li>
           <div className="total-price">
             <span className="f-left">Total:</span>
@@ -57,10 +56,10 @@ function Cart(props) {
         </li>
         <li>
           <div className="checkout-link">
-            <Link to="/shopping-cart">Shopping Cart</Link>
-            <a className="red-color" href="#">
+            
+            <Link to="/check-out" className="red-color" href="#">
               Checkout
-            </a>
+            </Link>
           </div>
         </li>
       </ul>
