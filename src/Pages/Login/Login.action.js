@@ -28,6 +28,8 @@ export function loginFailAction(error) {
   };
 }
 export default function loginAccountAction(data, history) {
+  console.log(data.email);
+  
   return async (dispatch) => {
     dispatch(loginRequestAction());
     try {
@@ -41,6 +43,10 @@ export default function loginAccountAction(data, history) {
       dispatch(loginGetInfoAccAction(data.email));
       if (history.location.state.from.pathname) {
         history.push(history.location.state.from.pathname);
+      }else{
+        if (history.location.state === "undefinded") {
+          history.push("/")
+        }
       }
     } catch (err) {
       console.log("err", err.response.data.message);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Layout from "../../components/layout";
 import LoadingWaitGetData from "../LoadingWaitGetData";
 
@@ -17,8 +17,8 @@ function ProductDetail(props) {
   // dung useParams
   const params = useParams();
   console.log(params);
+  const id = params.id;
   useEffect(() => {
-    const id = params.id;
     props.getProducDetail(id);
   }, []);
   console.log(props.productDetail);
@@ -26,11 +26,21 @@ function ProductDetail(props) {
   if (!product) {
     return (
       <>
-        {" "}
         <LoadingWaitGetData />
       </>
     );
   }
+  console.log(props.list);
+
+  const data = props.list.find((item) => item.id === id);
+  console.log("data", data);
+
+  const relativeProducts = props.list.filter(
+    (item) =>
+      item.shopInfo.shop_name === props.productDetail.shopInfo.shop_name &&
+      item.id !== data.id
+  );
+  console.log("relativeprodudct", relativeProducts);
 
   return (
     <Layout productsInCart={[]}>
@@ -43,6 +53,8 @@ function ProductDetail(props) {
             <div className="row">
               <div className="col-xl-12">
                 <div className="breadcrumb-text text-center">
+                  <LoadingWaitGetData />
+
                   <h1>Our Shop</h1>
                   <ul className="breadcrumb-menu">
                     <li>
@@ -401,284 +413,53 @@ function ProductDetail(props) {
             <div className="row">
               <div className="col-xl-12">
                 <div className="area-title text-center mb-50">
-                  <h2>Releted Products</h2>
+                  <h2>Related Products</h2>
                   <p>Browse the huge variety of our products</p>
                 </div>
               </div>
             </div>
             <div className="product-slider-2 owl-carousel">
-              <div className="pro-item">
-                <div className="product-wrapper">
-                  <div className="product-img mb-25">
-                    <a href="product-details.html">
-                      <img src="img/product/pro4.jpg" alt />
-                      <img
-                        className="secondary-img"
-                        src="img/product/pro5.jpg"
-                        alt
-                      />
-                    </a>
-                    <div className="product-action text-center">
-                      <a href="#" title="Shoppingb Cart">
-                        <i className="flaticon-shopping-cart" />
-                      </a>
-                      <a href="#" title="Quick View">
-                        <i className="flaticon-eye" />
-                      </a>
-                      <a
-                        href="#"
-                        data-toggle="tooltip"
-                        data-placement="right"
-                        title="Compare"
-                      >
-                        <i className="flaticon-compare" />
-                      </a>
-                    </div>
-                  </div>
-                  <div className="product-content">
-                    <div className="pro-cat mb-10">
-                      <a href="shop.html">decor, </a>
-                      <a href="shop.html">furniture</a>
-                    </div>
-                    <h4>
-                      <a href="product-details.html">
-                        Raglan Baseball Style shirt
-                      </a>
-                    </h4>
-                    <div className="product-meta">
-                      <div className="pro-price">
-                        <span>$119.00 USD</span>
-                        <span className="old-price">$230.00 USD</span>
+              {relativeProducts.map((item) => (
+                <div className="pro-item">
+                  <div className="product-wrapper">
+                    <div className="product-img mb-25">
+                      <Link to={`/product-detail/${props.id}`}>
+                        <img
+                          width={50}
+                          height={50}
+                          className="product-img__relative"
+                          src={item.imgUrl}
+                        />
+                      </Link>
+
+                      <div className="sale-tag">
+                        <span className="new">new</span>
+                        <span className="sale">sale</span>
                       </div>
                     </div>
-                    <div className="product-wishlist">
-                      <a href="#">
-                        <i className="far fa-heart" title="Wishlist" />
-                      </a>
+                    <div className="product-content">
+                      <div className="pro-cat mb-10">
+                        <a href="shop.html">decor, </a>
+                        <a href="shop.html">furniture</a>
+                      </div>
+                      <h4>
+                        <a href="product-details.html">{item.name}</a>
+                      </h4>
+                      <div className="product-meta">
+                        <div className="pro-price">
+                          <span>{item.price}</span>
+                          <span className="old-price">{item.priceMax}</span>
+                        </div>
+                      </div>
+                      <div className="product-wishlist">
+                        <a href="#">
+                          <i className="far fa-heart" title="Wishlist" />
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="pro-item">
-                <div className="product-wrapper">
-                  <div className="product-img mb-25">
-                    <a href="product-details.html">
-                      <img src="img/product/pro5.jpg" alt />
-                      <img
-                        className="secondary-img"
-                        src="img/product/pro6.jpg"
-                        alt
-                      />
-                    </a>
-                    <div className="product-action text-center">
-                      <a href="#" title="Shoppingb Cart">
-                        <i className="flaticon-shopping-cart" />
-                      </a>
-                      <a href="#" title="Quick View">
-                        <i className="flaticon-eye" />
-                      </a>
-                      <a
-                        href="#"
-                        data-toggle="tooltip"
-                        data-placement="right"
-                        title="Compare"
-                      >
-                        <i className="flaticon-compare" />
-                      </a>
-                    </div>
-                    <div className="sale-tag">
-                      <span className="new">new</span>
-                      <span className="sale">sale</span>
-                    </div>
-                  </div>
-                  <div className="product-content">
-                    <div className="pro-cat mb-10">
-                      <a href="shop.html">decor, </a>
-                      <a href="shop.html">furniture</a>
-                    </div>
-                    <h4>
-                      <a href="product-details.html">
-                        Raglan Baseball Style shirt
-                      </a>
-                    </h4>
-                    <div className="product-meta">
-                      <div className="pro-price">
-                        <span>$119.00 USD</span>
-                        <span className="old-price">$230.00 USD</span>
-                      </div>
-                    </div>
-                    <div className="product-wishlist">
-                      <a href="#">
-                        <i className="far fa-heart" title="Wishlist" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="pro-item">
-                <div className="product-wrapper">
-                  <div className="product-img mb-25">
-                    <a href="product-details.html">
-                      <img src="img/product/pro7.jpg" alt />
-                      <img
-                        className="secondary-img"
-                        src="img/product/pro8.jpg"
-                        alt
-                      />
-                    </a>
-                    <div className="product-action text-center">
-                      <a href="#" title="Shoppingb Cart">
-                        <i className="flaticon-shopping-cart" />
-                      </a>
-                      <a href="#" title="Quick View">
-                        <i className="flaticon-eye" />
-                      </a>
-                      <a
-                        href="#"
-                        data-toggle="tooltip"
-                        data-placement="right"
-                        title="Compare"
-                      >
-                        <i className="flaticon-compare" />
-                      </a>
-                    </div>
-                  </div>
-                  <div className="product-content">
-                    <div className="pro-cat mb-10">
-                      <a href="shop.html">decor, </a>
-                      <a href="shop.html">furniture</a>
-                    </div>
-                    <h4>
-                      <a href="product-details.html">
-                        Raglan Baseball Style shirt
-                      </a>
-                    </h4>
-                    <div className="product-meta">
-                      <div className="pro-price">
-                        <span>$119.00 USD</span>
-                        <span className="old-price">$230.00 USD</span>
-                      </div>
-                    </div>
-                    <div className="product-wishlist">
-                      <a href="#">
-                        <i className="far fa-heart" title="Wishlist" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="pro-item">
-                <div className="product-wrapper">
-                  <div className="product-img mb-25">
-                    <a href="product-details.html">
-                      <img src="img/product/pro9.jpg" alt />
-                      <img
-                        className="secondary-img"
-                        src="img/product/pro10.jpg"
-                        alt
-                      />
-                    </a>
-                    <div className="product-action text-center">
-                      <a href="#" title="Shoppingb Cart">
-                        <i className="flaticon-shopping-cart" />
-                      </a>
-                      <a href="#" title="Quick View">
-                        <i className="flaticon-eye" />
-                      </a>
-                      <a
-                        href="#"
-                        data-toggle="tooltip"
-                        data-placement="right"
-                        title="Compare"
-                      >
-                        <i className="flaticon-compare" />
-                      </a>
-                    </div>
-                    <div className="sale-tag">
-                      <span className="new">new</span>
-                      <span className="sale">sale</span>
-                    </div>
-                  </div>
-                  <div className="product-content">
-                    <div className="pro-cat mb-10">
-                      <a href="shop.html">decor, </a>
-                      <a href="shop.html">furniture</a>
-                    </div>
-                    <h4>
-                      <a href="product-details.html">
-                        Raglan Baseball Style shirt
-                      </a>
-                    </h4>
-                    <div className="product-meta">
-                      <div className="pro-price">
-                        <span>$119.00 USD</span>
-                        <span className="old-price">$230.00 USD</span>
-                      </div>
-                    </div>
-                    <div className="product-wishlist">
-                      <a href="#">
-                        <i className="far fa-heart" title="Wishlist" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="pro-item">
-                <div className="product-wrapper">
-                  <div className="product-img mb-25">
-                    <a href="product-details.html">
-                      <img src="img/product/pro1.jpg" alt />
-                      <img
-                        className="secondary-img"
-                        src="img/product/pro11.jpg"
-                        alt
-                      />
-                    </a>
-                    <div className="product-action text-center">
-                      <a href="#" title="Shoppingb Cart">
-                        <i className="flaticon-shopping-cart" />
-                      </a>
-                      <a href="#" title="Quick View">
-                        <i className="flaticon-eye" />
-                      </a>
-                      <a
-                        href="#"
-                        data-toggle="tooltip"
-                        data-placement="right"
-                        title="Compare"
-                      >
-                        <i className="flaticon-compare" />
-                      </a>
-                    </div>
-                    <div className="sale-tag">
-                      <span className="new">new</span>
-                      <span className="sale">sale</span>
-                    </div>
-                  </div>
-                  <div className="product-content">
-                    <div className="pro-cat mb-10">
-                      <a href="shop.html">decor, </a>
-                      <a href="shop.html">furniture</a>
-                    </div>
-                    <h4>
-                      <a href="product-details.html">
-                        Raglan Baseball Style shirt
-                      </a>
-                    </h4>
-                    <div className="product-meta">
-                      <div className="pro-price">
-                        <span>$119.00 USD</span>
-                        <span className="old-price">$230.00 USD</span>
-                      </div>
-                    </div>
-                    <div className="product-wishlist">
-                      <a href="#">
-                        <i className="far fa-heart" title="Wishlist" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
@@ -689,6 +470,7 @@ function ProductDetail(props) {
 const mapStateToProps = (state) => {
   return {
     productDetail: state.productDetailReducer.data,
+    list: state.productsReducer.products,
   };
 };
 const mapDispatchToProps = {
