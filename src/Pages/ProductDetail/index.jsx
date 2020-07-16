@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import Layout from "../../components/layout";
 import LoadingWaitGetData from "../LoadingWaitGetData";
 
-import { productDetailAction } from "./ProductDetail.action";
+import { productDetailAction, productListAction } from "./ProductDetail.action";
 import { FacebookShareButton, FacebookIcon } from "react-share";
 function ProductDetail(props) {
   const [quantity, setQuantity] = useState(0);
@@ -14,6 +14,10 @@ function ProductDetail(props) {
   const increaseQuantity = () => {
     setQuantity({ quantity: quantity + 1 });
   };
+  // lay danh sach san pham
+  useEffect(() => {
+    props.getProductList();
+  }, []);
   // dung useParams
   const params = useParams();
   console.log(params);
@@ -21,24 +25,16 @@ function ProductDetail(props) {
   useEffect(() => {
     props.getProducDetail(id);
   }, []);
-  console.log(props.productDetail);
+  console.log("detail",props.productDetail);
   const product = props.productDetail;
   if (!product) {
-    return (
-      <>
-        <LoadingWaitGetData />
-      </>
-    );
+    return <>Loading...</>;
   }
   console.log(props.list);
-
-  const data = props.list.find((item) => item.id === id);
-  console.log("data", data);
-
   const relativeProducts = props.list.filter(
     (item) =>
-      item.shopInfo.shop_name === props.productDetail.shopInfo.shop_name &&
-      item.id !== data.id
+      item.shopName === props.productDetail.shopName &&
+      item.id !== id
   );
   console.log("relativeprodudct", relativeProducts);
 
@@ -72,6 +68,7 @@ function ProductDetail(props) {
         <section className="shop-details-area pt-100 pb-100">
           <div className="container">
             <div className="row">
+              
               <div className="col-xl-6 col-lg-4">
                 <div className="product-details-img mb-10">
                   <div className="tab-content" id="myTabContentpro">
@@ -81,12 +78,12 @@ function ProductDetail(props) {
                       role="tabpanel"
                     >
                       <div className="product-large-img img-fluid">
-                        <img src={product.image} alt />
+                        <img src={product.images[0]} alt />
                       </div>
                     </div>
                     <div className="tab-pane fade" id="profile" role="tabpanel">
                       <div className="product-large-img">
-                        <img src={product.image} alt />
+                        <img src={product.images[0]} alt />
                       </div>
                     </div>
                     <div
@@ -95,7 +92,7 @@ function ProductDetail(props) {
                       role="tabpanel"
                     >
                       <div className="product-large-img">
-                        <img src={product.image} alt />
+                        <img src={product.images[0]} alt />
                       </div>
                     </div>
                   </div>
@@ -111,7 +108,7 @@ function ProductDetail(props) {
                         role="tab"
                         aria-selected="true"
                       >
-                        <img src={product.image} alt />
+                        <img src={product.images[0]} alt />
                       </a>
                     </li>
                     <li className="nav-item">
@@ -123,7 +120,7 @@ function ProductDetail(props) {
                         role="tab"
                         aria-selected="false"
                       >
-                        <img src={product.image} alt />
+                        <img src={product.images[0]} alt />
                       </a>
                     </li>
                     <li className="nav-item">
@@ -135,7 +132,7 @@ function ProductDetail(props) {
                         role="tab"
                         aria-selected="false"
                       >
-                        <img src={product.image} alt />
+                        <img src={product.images[0]} alt />
                       </a>
                     </li>
                   </ul>
@@ -149,9 +146,9 @@ function ProductDetail(props) {
                   </div>
                   <h2 className="pro-details-title mb-15">{product.name}</h2>
                   <div className="details-price mb-20">
-                    <span>{product.price.toLocaleString()}</span>
+                    <span>{product.finalPrice.toLocaleString()}</span>
                     <span className="old-price">
-                      {product.priceMax.toLocaleString()}
+                      {/* {product.finalPriceMax.toLocaleString()} */}
                     </span>
                   </div>
                   <div className="product-variant">
@@ -423,14 +420,14 @@ function ProductDetail(props) {
                 <div className="pro-item">
                   <div className="product-wrapper">
                     <div className="product-img mb-25">
-                      <Link to={`/product-detail/${props.id}`}>
+                      <a href={`/product-detail/${item.id}`}>
                         <img
                           width={50}
                           height={50}
                           className="product-img__relative"
                           src={item.imgUrl}
                         />
-                      </Link>
+                      </a>
 
                       <div className="sale-tag">
                         <span className="new">new</span>
@@ -470,10 +467,11 @@ function ProductDetail(props) {
 const mapStateToProps = (state) => {
   return {
     productDetail: state.productDetailReducer.data,
-    list: state.productsReducer.products,
+    list: state.productDetailReducer.productsList,
   };
 };
 const mapDispatchToProps = {
   getProducDetail: productDetailAction,
+  getProductList: productListAction,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

@@ -1,6 +1,7 @@
 export const ADD_PRODUCT_TO_CART_SUCCESS = "ADD_PRODUCT_TO_CART_SUCCESS";
 export const DELETE_PRODUCT_CART = "DELETE_PRODUCT_CART";
 export const QUANTITY_PRODUCT_CART = "QUANTITY_PRODUCT_CART";
+
 export function addProductToCartSuccesstAction(cartProduct) {
   return {
     type: ADD_PRODUCT_TO_CART_SUCCESS,

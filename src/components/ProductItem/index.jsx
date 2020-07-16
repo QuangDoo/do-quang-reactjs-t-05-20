@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addProductToCart } from "./ProductItem.action";
-import  { createTheme } from "react-dark-theme";
+import { createTheme } from "react-dark-theme";
 
 function ProductItem(props) {
-  const onAddToCart = () => {
-    return props.addProductInCart(props);
-  };
+  // const onAddToCart = () => {
+  //   return props.addProductInCart(props);
+  // };
   const lightTheme = {
     background: "white",
     color: "black",
@@ -25,11 +25,16 @@ function ProductItem(props) {
         <div className="product-wrapper mb-50">
           <div className="product-img mb-25">
             <a href="#">
-              <img src={props.image} alt />
+              <img src={props.imgUrl} alt />
             </a>
             <div className="product-action text-center">
               <a title="Shoppingb Cart">
-                <i className="fas fa-shopping-cart" onClick={onAddToCart} />
+                <i
+                  className="fas fa-shopping-cart"
+                  onClick={() => {
+                    props.addProductInCart(props);
+                  }}
+                />
               </a>
               <Link to={`/product-detail/${props.id}`} title="Quick View">
                 <i className="fas fa-search" />
@@ -41,16 +46,22 @@ function ProductItem(props) {
               <a href="#">{props.type}</a>
             </div>
             <h4>
-              <span className="shopInfor_shopName" style={{ color: myTheme.color }}  href="#">
-                {props.shopInfo.shop_name}
+              <span
+                className="shopInfor_shopName"
+                style={{ color: myTheme.color }}
+                href="#"
+              >
+                {props.shopName}
               </span>
               <br />
-              <a href="#" style={{ color: myTheme.color }}>{props.name}</a>
+              <a href="#" style={{ color: myTheme.color }}>
+                {props.name}
+              </a>
             </h4>
             <div className="product-meta">
               <div className="pro-price">
-                <span>{props.price}</span>
-                <span className="old-price">{props.disCountPrice}</span>
+                <span>{props.finalPrice}</span>
+                <span className="old-price">{props.finalPriceMax}</span>
               </div>
             </div>
           </div>

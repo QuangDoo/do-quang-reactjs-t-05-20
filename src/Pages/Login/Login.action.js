@@ -29,7 +29,7 @@ export function loginFailAction(error) {
 }
 export default function loginAccountAction(data, history) {
   console.log(data.email);
-  
+
   return async (dispatch) => {
     dispatch(loginRequestAction());
     try {
@@ -41,12 +41,12 @@ export default function loginAccountAction(data, history) {
       localStorage.setItem("token", result.data.accessToken);
       dispatch(loginSuccessAction(result.data.accessToken));
       dispatch(loginGetInfoAccAction(data.email));
+      
+      console.log(history.location.state.from.pathname);
       if (history.location.state.from.pathname) {
         history.push(history.location.state.from.pathname);
-      }else{
-        if (history.location.state === "undefinded") {
-          history.push("/")
-        }
+      } else if (history.location.state === undefined) {
+        history.push("/check-out");
       }
     } catch (err) {
       console.log("err", err.response.data.message);

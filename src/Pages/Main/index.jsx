@@ -96,8 +96,8 @@ function App(props) {
   };
   const onSearch = (value) => {
     console.log(value);
-
-    const newProducts = [...data.data].filter((product) => {
+    const productSearch = [...props.productsList]
+    const newProducts = productSearch.filter((product) => {
       return product.name.includes(value);
     });
     setProductsList(newProducts);
@@ -139,7 +139,7 @@ function App(props) {
                   return (
                     <ProductItem
                       {...elm}
-                      imageURL={elm.image}
+                      // imageURL={elm.image}
                       // onAddProduct={AddProductToCart}
                     />
                   );

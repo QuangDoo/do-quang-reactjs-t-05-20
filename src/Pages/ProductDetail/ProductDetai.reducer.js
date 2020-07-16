@@ -3,6 +3,8 @@ const initiState = {
   data: null,
   loading: false,
   error: null,
+  productsList: [],
+  errProductList: null,
 };
 
 function ProductDetailReducer(state = initiState, action) {
@@ -24,6 +26,20 @@ function ProductDetailReducer(state = initiState, action) {
         ...state,
         loading: false,
         error: action.error,
+      };
+    case actionTypes.PRODUCTLISTDETAIL_REQUEST:
+      return {
+        ...state,
+      };
+    case actionTypes.PRODUCTLISTDETAIL_SUCCESS:
+      return {
+        ...state,
+        productsList: action.products,
+      };
+    case actionTypes.PRODUCTLISTDETAIL_FAIL:
+      return {
+        ...state,
+        errProductList: action.err,
       };
     default:
       return { ...state };

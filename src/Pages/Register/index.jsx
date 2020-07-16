@@ -4,14 +4,13 @@ import { Link, useHistory } from "react-router-dom";
 import Layout from "../../components/layout";
 import { registerAccountAction } from "./Register.action";
 function Register(props) {
-  
   const [valueRegister, setValueRegister] = useState({
     fullName: "",
     email: "",
     password: "",
   });
   const history = useHistory();
-
+  console.log(history);
 
   const onChange = (e) => {
     setValueRegister({
@@ -23,10 +22,8 @@ function Register(props) {
     e.preventDefault();
     try {
       await props.registerAccount(valueRegister, history);
-      
     } catch (err) {
       console.log(err);
-      
     }
   };
 

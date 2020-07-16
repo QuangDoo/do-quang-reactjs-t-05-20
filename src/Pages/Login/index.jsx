@@ -7,7 +7,7 @@ import GoogleLogin, { GoogleLogout } from "react-google-login";
 
 function Login(props) {
   const [valueLogin, setValueLogin] = useState({ email: "", password: "" });
-
+  console.log(props.location);
   const history = useHistory();
   console.log(history);
 
@@ -110,7 +110,7 @@ function Login(props) {
                       onFailure={responseGoogle}
                       cookiePolicy={"single_host_origin"}
                     />
-                    
+
                     <div className="or-divide">
                       <span>or</span>
                     </div>

@@ -27,9 +27,9 @@ function Cart(props) {
                 <span className="ml-4">
                   <del>{element.priceMax}</del>
                 </span>
-                <span onClick={()=>{props.quantityProductsInCart(index,false)}}>-</span>
+                <span className="quantityProduct" onClick={()=>{props.quantityProductsInCart(index,false)}}>-</span>
                 <span className="ml-2 mr-2">x{element.quantity}</span>
-                <span onClick={()=>{props.quantityProductsInCart(index,true)}}>+</span>
+                <span className="quantityProduct" onClick={()=>{props.quantityProductsInCart(index,true)}}>+</span>
               </div>
             </div>
             <div className="del-icon">

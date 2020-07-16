@@ -280,3 +280,6 @@ input-group-append button:hover {
   width: 15%!important;
   height: 170px;
 }
+.quantityProduct:hover{
+  cursor: pointer;
+}

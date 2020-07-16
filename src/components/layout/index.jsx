@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Cart from "../Cart";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -10,6 +10,10 @@ const logOut = () => {
 };
 
 function Layout(props) {
+  const [email, setEmail] = useState("");
+  useEffect(() => {
+    setEmail(props.getEmail);
+  });
   // theme mode
   const lightTheme = {
     background: "white",
@@ -107,9 +111,9 @@ function Layout(props) {
               <div className="col-xl-2 col-lg-6 col-md-6 col-5 col-sm-7 pl-0">
                 <div className="header-right f-right">
                   <ul>
-                    {props.getEmail ? (
+                    {email ? (
                       <li className="login-btn">
-                        {props.getEmail}
+                        {email}
                         <ul className="subaccount">
                           <li>
                             <a onClick={logOut}>Log Out</a>
@@ -158,7 +162,11 @@ function Layout(props) {
                     </a>
                   </div>
                   <p style={{ color: myTheme.color }}>
-                  Trải nghiệm mua sắm Online với hàng ngàn sản phẩm khác nhau, uy tín hàng đầu tại Việt Nam. Hàng chính hãng giá cạnh tranh, giao nhanh trong ngày, hỗ trợ tư vấn 24/7, Mua ngay! Giá Tốt Nhất Thị Trường. Cam Kết Hàng Chính Hãng. Giao Hàng An Toàn Tận Tay.
+                    Trải nghiệm mua sắm Online với hàng ngàn sản phẩm khác nhau,
+                    uy tín hàng đầu tại Việt Nam. Hàng chính hãng giá cạnh
+                    tranh, giao nhanh trong ngày, hỗ trợ tư vấn 24/7, Mua ngay!
+                    Giá Tốt Nhất Thị Trường. Cam Kết Hàng Chính Hãng. Giao Hàng
+                    An Toàn Tận Tay.
                   </p>
                   <div className="footer-time d-flex mt-30">
                     <div className="time-icon">
